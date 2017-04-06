@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+<?php
+
+$shortOptions = "c:h";
+$longOptions = ['config:', 'help'];
+
+$options = getopt($shortOptions, $longOptions);
+
+$config = null;
+if (!empty($options['c'])) {
+    $config = $options['c'];
+} elseif (!empty($options['config'])) {
+    $config = $options['config'];
+}
+
+$args = array_search('--', $argv);
+$args = array_splice(
+    $argv,
+    $args ? ++$args : (count($argv) - max(1, count($options)))
+);
+$query = implode(' ', $args);
+
+if (empty($query) || $query == __FILE__ || isset($options['h']) || isset($options['help'])) {
+    echo 'Usage: ' . basename(__FILE__) . ' [options] <query>' . PHP_EOL;
+    echo '  -h, --help              Show help.' . PHP_EOL;
+    echo '  -c, --config <path>     Path to an XML configuration file.' . PHP_EOL;
+    exit;
+}
+
+require_once 'common.inc.php';
+
+
+echo PHP_EOL . 'Searching ' . $search->getDomains(false) . " for '$query'" . PHP_EOL . PHP_EOL;
+$results = $search->search($query);
+foreach ($results as $result) {
+    echo $result->getTitle() .
+        ' [' . $result->getRelevance()->getScore() . ', ' .
+        $result->getSource()->getName() . ']' . PHP_EOL;
+    echo $result->getUrl() . PHP_EOL;
+    echo (empty($result->getDescription()) ?
+            '' : html_entity_decode(strip_tags($result->getDescription())) .
+            PHP_EOL) . PHP_EOL;
+}

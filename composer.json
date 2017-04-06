@@ -1,0 +1,21 @@
+{
+    "name": "smtech/stmarks-search",
+    "description": "Search for resources at St. Mark's School",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Seth Battis",
+            "email": "SethBattis@stmarksschool.org"
+        }
+    ],
+    "require": {
+        "battis/configxml": "^1.0",
+        "smtech/canvaspest": "^1.0",
+        "smtech/stmarkssmarty": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "smtech\\StMarksSearch\\": "src"
+        }
+    }
+}

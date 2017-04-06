@@ -1,0 +1,566 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3b072225ace73d989115124812eb69b3",
+    "packages": [
+        {
+            "name": "battis/bootstrapsmarty",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/battis/bootstrapsmarty.git",
+                "reference": "c95297336ca37a48f3bcbc655275996ebbd0a2f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/battis/bootstrapsmarty/zipball/c95297336ca37a48f3bcbc655275996ebbd0a2f9",
+                "reference": "c95297336ca37a48f3bcbc655275996ebbd0a2f9",
+                "shasum": ""
+            },
+            "require": {
+                "battis/data-utilities": "~0.1",
+                "bower-asset/bootstrap-colorpicker-2.x": "~2.3",
+                "bower-asset/bootstrap-datepicker-1.x": "~1.6",
+                "bower-asset/bootstrap-sortable-2.x": "~2.0",
+                "fxp/composer-asset-plugin": "^1.1",
+                "smarty/smarty": "~3.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Battis\\BootstrapSmarty\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Seth Battis",
+                    "email": "seth@battis.net"
+                }
+            ],
+            "description": "A wrapper for Smarty to set (and maintain) defaults within a Bootstrap UI environment",
+            "time": "2016-08-01T13:10:10+00:00"
+        },
+        {
+            "name": "battis/configxml",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/battis/configxml.git",
+                "reference": "b68daa917e052bd8f53c3be0378b23d33526f961"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/battis/configxml/zipball/b68daa917e052bd8f53c3be0378b23d33526f961",
+                "reference": "b68daa917e052bd8f53c3be0378b23d33526f961",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Battis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Seth Battis",
+                    "email": "seth@battis.net"
+                }
+            ],
+            "description": "Load a configuration XML file for quick use",
+            "time": "2016-05-09T19:47:21+00:00"
+        },
+        {
+            "name": "battis/data-utilities",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/battis/data-utilities.git",
+                "reference": "fe6efd42bec6e6a30e2345d5b71ab57f107fb922"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/battis/data-utilities/zipball/fe6efd42bec6e6a30e2345d5b71ab57f107fb922",
+                "reference": "fe6efd42bec6e6a30e2345d5b71ab57f107fb922",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Battis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Seth Battis",
+                    "email": "sethbattis@stmarksschool.org"
+                }
+            ],
+            "description": "A handful of useful helper functions to process data",
+            "time": "2016-10-09T18:59:38+00:00"
+        },
+        {
+            "name": "battis/educoder-pest-fork",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/battis/pest.git",
+                "reference": "ee99df2b7e276195d3ab06738f2af3f44f3ed054"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/battis/pest/zipball/ee99df2b7e276195d3ab06738f2af3f44f3ed054",
+                "reference": "ee99df2b7e276195d3ab06738f2af3f44f3ed054",
+                "shasum": ""
+            },
+            "require": {
+                "lib-curl": "*",
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Zukowski",
+                    "email": "matt@zukowski.ca"
+                },
+                {
+                    "name": "Donald Sipe",
+                    "email": "donald.sipe@gmail.com"
+                }
+            ],
+            "description": "A proper REST client for PHP.",
+            "homepage": "https://github.com/educoder/pest",
+            "time": "2016-03-23T15:38:23+00:00"
+        },
+        {
+            "name": "bower-asset/bootstrap-colorpicker-2.x",
+            "version": "2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itsjavi/bootstrap-colorpicker.git",
+                "reference": "db978b4d8c3436cdaed6e3a1a065f9f47bb686b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itsjavi/bootstrap-colorpicker/zipball/db978b4d8c3436cdaed6e3a1a065f9f47bb686b1",
+                "reference": "db978b4d8c3436cdaed6e3a1a065f9f47bb686b1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.10"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "dist/css/bootstrap-colorpicker.css",
+                    "dist/js/bootstrap-colorpicker.js"
+                ],
+                "bower-asset-ignore": [
+                    "\\.*",
+                    "/index.html",
+                    "/package.json",
+                    "/composer.json",
+                    "/Gruntfile.js",
+                    "/.travis.yml",
+                    "/travis.sh",
+                    "/server.js"
+                ]
+            }
+        },
+        {
+            "name": "bower-asset/bootstrap-datepicker-1.x",
+            "version": "v1.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uxsolutions/bootstrap-datepicker.git",
+                "reference": "42940960ffaf6c727c9f2d64a6175be87516986e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uxsolutions/bootstrap-datepicker/zipball/42940960ffaf6c727c9f2d64a6175be87516986e",
+                "reference": "42940960ffaf6c727c9f2d64a6175be87516986e",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "dist/css/bootstrap-datepicker3.css",
+                    "dist/js/bootstrap-datepicker.min.js"
+                ],
+                "bower-asset-ignore": []
+            },
+            "license": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "name": "bower-asset/bootstrap-sortable-2.x",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drvic10k/bootstrap-sortable.git",
+                "reference": "0df36e981d102963dd08ac3db8b247e00286600d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drvic10k/bootstrap-sortable/zipball/0df36e981d102963dd08ac3db8b247e00286600d",
+                "reference": "0df36e981d102963dd08ac3db8b247e00286600d",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.9.0",
+                "bower-asset/moment": ">=2.3.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "Scripts/bootstrap-sortable.js",
+                "bower-asset-ignore": [
+                    "Scripts/moment.min.js"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Adding sorting ability to HTML tables",
+            "keywords": [
+                "bootstrap sortable",
+                "bootstrap-sortable",
+                "sort table",
+                "sortable",
+                "sortable table"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery",
+            "version": "3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jquery/jquery-dist.git",
+                "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/77d2a51d0520d2ee44173afdf4e40a9201f5964e",
+                "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "dist/jquery.js",
+                "bower-asset-ignore": [
+                    "package.json"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "browser",
+                "javascript",
+                "jquery",
+                "library"
+            ]
+        },
+        {
+            "name": "bower-asset/moment",
+            "version": "2.18.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moment/moment.git",
+                "reference": "b8a7fc310eb3625e83fc0c8f1ea2840fa83c7378"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moment/moment/zipball/b8a7fc310eb3625e83fc0c8f1ea2840fa83c7378",
+                "reference": "b8a7fc310eb3625e83fc0c8f1ea2840fa83c7378",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "moment.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "benchmarks",
+                    "bower_components",
+                    "meteor",
+                    "node_modules",
+                    "scripts",
+                    "tasks",
+                    "test",
+                    "component.json",
+                    "composer.json",
+                    "CONTRIBUTING.md",
+                    "ender.js",
+                    "Gruntfile.js",
+                    "Moment.js.nuspec",
+                    "package.js",
+                    "package.json",
+                    "ISSUE_TEMPLATE.md",
+                    "typing-tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "fxp/composer-asset-plugin",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fxpio/composer-asset-plugin.git",
+                "reference": "4aab26a846e61edca2ba91c9b980f6503f7dc84d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fxpio/composer-asset-plugin/zipball/4aab26a846e61edca2ba91c9b980f6503f7dc84d",
+                "reference": "4aab26a846e61edca2ba91c9b980f6503f7dc84d",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "composer/composer": "^1.4.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Fxp\\Composer\\AssetPlugin\\FxpAssetPlugin",
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fxp\\Composer\\AssetPlugin\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Pluchino",
+                    "email": "francois.pluchino@gmail.com"
+                }
+            ],
+            "description": "NPM/Bower Dependency Manager for Composer",
+            "homepage": "https://github.com/fxpio/composer-asset-plugin",
+            "keywords": [
+                "asset",
+                "bower",
+                "composer",
+                "dependency manager",
+                "nodejs",
+                "npm",
+                "package"
+            ],
+            "time": "2017-03-17T11:16:25+00:00"
+        },
+        {
+            "name": "smarty/smarty",
+            "version": "v3.1.31",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smarty-php/smarty.git",
+                "reference": "c7d42e4a327c402897dd587871434888fde1e7a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/c7d42e4a327c402897dd587871434888fde1e7a9",
+                "reference": "c7d42e4a327c402897dd587871434888fde1e7a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "libs/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Monte Ohrt",
+                    "email": "monte@ohrt.com"
+                },
+                {
+                    "name": "Uwe Tews",
+                    "email": "uwe.tews@googlemail.com"
+                },
+                {
+                    "name": "Rodney Rehm",
+                    "email": "rodney.rehm@medialize.de"
+                }
+            ],
+            "description": "Smarty - the compiling PHP template engine",
+            "homepage": "http://www.smarty.net",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2016-12-14T21:57:25+00:00"
+        },
+        {
+            "name": "smtech/canvaspest",
+            "version": "v1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smtech/canvaspest.git",
+                "reference": "b06ab320228873a0278272888a63e29edcd53ce0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smtech/canvaspest/zipball/b06ab320228873a0278272888a63e29edcd53ce0",
+                "reference": "b06ab320228873a0278272888a63e29edcd53ce0",
+                "shasum": ""
+            },
+            "require": {
+                "battis/educoder-pest-fork": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "smtech\\CanvasPest\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Seth Battis",
+                    "email": "sethbattis@stmarksschool.org"
+                }
+            ],
+            "description": "An extension of Pest to make RESTful queries to the Instructure Canvas API",
+            "time": "2017-04-04T12:32:46+00:00"
+        },
+        {
+            "name": "smtech/stmarks-colors",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smtech/stmarks-colors.git",
+                "reference": "4e36a4f9e76c00d894487dac18a9d85ebcc54c39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smtech/stmarks-colors/zipball/4e36a4f9e76c00d894487dac18a9d85ebcc54c39",
+                "reference": "4e36a4f9e76c00d894487dac18a9d85ebcc54c39",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "smtech\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Seth Battis",
+                    "email": "sethbattis@stmarksschool.org"
+                }
+            ],
+            "description": "An object-ified, consistent set of hex colors for St. Mark’s projects",
+            "time": "2016-03-17T15:26:18+00:00"
+        },
+        {
+            "name": "smtech/stmarkssmarty",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smtech/stmarks-bootstrapsmarty.git",
+                "reference": "e481110eed523a1c6dc3e1a8d152785ab909cfc9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smtech/stmarks-bootstrapsmarty/zipball/e481110eed523a1c6dc3e1a8d152785ab909cfc9",
+                "reference": "e481110eed523a1c6dc3e1a8d152785ab909cfc9",
+                "shasum": ""
+            },
+            "require": {
+                "battis/bootstrapsmarty": "~2.0",
+                "battis/data-utilities": "~0.1",
+                "smtech/stmarks-colors": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "smtech\\StMarksSmarty\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Seth Battis",
+                    "email": "sethbattis@stmarksschool.org"
+                }
+            ],
+            "description": "A standard Smarty install for St. Mark's projects",
+            "time": "2016-08-01T13:20:55+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

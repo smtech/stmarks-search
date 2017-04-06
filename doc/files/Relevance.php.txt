@@ -1,0 +1,80 @@
+<?php
+
+namespace smtech\StMarksSearch;
+
+/**
+ * Description of a search result's relevance, with rationales
+ *
+ * @author Seth Battis <SethBattis@stmarksschool.org>
+ */
+class Relevance
+{
+    /**
+     * Relevance score
+     *
+     * Ideally in a range from 0-10, with 5 indicating a fundamentally useful
+     * result.
+     *
+     * @var float
+     */
+    private $score;
+
+    /**
+     * A list of rationales indicating how the relevance score was generated.
+     *
+     * @var string[]
+     */
+    private $rationales = [];
+
+    /**
+     * Construct a Relevance object
+     *
+     * @param float $score (Optional, defaults to 0.0)
+     * @param string $rationale (Optional, defaults to `"Base value"` if
+     *                          `$score` is non-zero`)
+     */
+    public function __construct($score = 0.0, $rationale = "Base value")
+    {
+        $this->score = $score;
+        if ($score > 0) {
+            $this->rationales[] = "$score: $rationale";
+        }
+    }
+
+    /**
+     * Add to the relevance of a score
+     *
+     * Or, one presumes, subtract, if `$scoreIncrement` is negative!
+     *
+     * @param float $scoreIncrement
+     * @param string $rationale Rationale for this particular increment
+     */
+    public function add($scoreIncrement, $rationale)
+    {
+        $this->score += $scoreIncrement;
+        $this->rationales[] = "$scoreIncrement: $rationale";
+    }
+
+    /**
+     * Relevance score (ideally 0-10, with 5 indicating a fundamentally useful
+     * result)
+     *
+     * @return float
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * List of rationale's for how the relevance score was calculated
+     *
+     * @param  string $separator (Optional, defaults to `', '`)
+     * @return string List of scoring rationales
+     */
+    public function getRationale($separator = ', ')
+    {
+        return implode($separator, $this->rationales);
+    }
+}
+

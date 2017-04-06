@@ -1,0 +1,17 @@
+<config>
+    <engine>
+        <name>St. Mark’s Search</name>
+        <url>https://search.stmarksschool.org/</url>
+    </engine>
+    <canvas>
+        <api>
+            <url>https://canvas.instructure.com/api/v1</url>
+            <token>gesundheit!</token>
+        </api>
+        <course id="sis_course_id:faculty-resources" pages="true" announcements="true" />
+    </canvas>
+    <wordpress>
+        <blog name="Help Desk" url="https://helpdesk.stmarksschool.org" posts="true" />
+        <blog name="The Center Resource Site" url="https://blogs.stmarksschool.org/thecenter" posts="true" pages="true" />
+    </wordpress>
+</config>
