@@ -3,9 +3,9 @@
 namespace smtech\StMarksSearch\WordPress;
 
 use Battis\Educoder\Pest;
-
 use smtech\StMarksSearch\AbstractSearchDomain;
 use smtech\StMarksSearch\SearchResult;
+use smtech\StMarksSearch\SearchSource;
 
 /**
  * A parent object for WordPress search domains
@@ -22,7 +22,7 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
 
     /**
      * Summary information about search domain for search results
-     * @var SearchResult
+     * @var SearchSource
      */
     protected $source;
 

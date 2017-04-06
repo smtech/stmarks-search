@@ -5,6 +5,7 @@ namespace smtech\StMarksSearch\WordPress;
 use Battis\Educoder\Pest;
 use smtech\StMarksSearch\AbstractSearchDomain;
 use smtech\StMarksSearch\SearchResult;
+use smtech\StMarksSearch\SearchSource;
 
 /**
  * A parent object for WordPress search domains
