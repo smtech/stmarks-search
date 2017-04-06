@@ -3,9 +3,7 @@
 namespace smtech\StMarksSearch\Canvas\Courses;
 
 use Exception;
-
 use smtech\CanvasPest\CanvasPest;
-
 use smtech\StMarksSearch\SearchEngine;
 use smtech\StMarksSearch\Canvas\Courses\Pages\PagesSearch;
 

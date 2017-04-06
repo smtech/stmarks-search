@@ -2,9 +2,7 @@
 
 namespace smtech\StMarksSearch\Canvas\Courses\Pages;
 
-use smtech\CanvasPest\CanvasPest;
 use smtech\CanvasPest\CanvasObject;
-
 use smtech\StMarksSearch\Relevance;
 use smtech\StMarksSearch\SearchResult;
 use smtech\StMarksSearch\SearchSource;
