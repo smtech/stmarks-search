@@ -22,7 +22,7 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
 
     /**
      * Summary information about search domain for search results
-     * @var SearchResult
+     * @var SearchSource
      */
     protected $source;
 

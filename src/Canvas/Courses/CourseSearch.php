@@ -28,10 +28,9 @@ class CourseSearch extends SearchEngine
     public function __construct(CanvasPest $api, $params)
     {
         assert(!empty($params['id']), new Exception('Non-empty id parameter required'));
-        $this->api = $api;
-        $course = $this->api->get("/courses/{$params['id']}");
+        $course = $api->get("/courses/{$params['id']}");
         $params['name'] = $course['name'];
-        $params['url'] = str_replace('/api/v1', '', "{$this->api->base_url}/courses/{$course['id']}");
+        $params['url'] = str_replace('/api/v1', '', "{$api->base_url}/courses/{$course['id']}");
         $params['pages'] = !empty($params['pages']) && filter_var($params['pages'], FILTER_VALIDATE_BOOLEAN);
 
         parent::__construct($params);
