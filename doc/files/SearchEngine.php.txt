@@ -56,17 +56,24 @@ class SearchEngine extends AbstractSearchDomain
      *                            well as the names?
      * @param boolean $htmlFormatted (Optional, defaults to `true`) Should the
      *                               list of search domains be HTML formatted?
+     * @param boolean $includeIcon (Optional, defaults to `true`) Should the
+     *                             domains include their icons (valid only if
+     *                             HTML-formatted)
      * @param string $separator (Optional, defaults to `', '`)
      * @return string List of search domains aggregated by this engine (for
      *                display)
      */
-    public function getDomains($includeUrl = true, $htmlFormatted = true, $separator = ', ')
+    public function getDomains($includeUrl = true, $htmlFormatted = true, $includeIcon = true, $separator = ', ')
     {
         $domains = [];
         foreach ($this->searchDomains as $domain) {
             if ($includeUrl) {
                 if ($htmlFormatted) {
-                    $domains[] = '<a href="' . $domain->getUrl() . '">' . $domain->getName() . '</a>';
+                    $domains[] = '<a href="' . $domain->getUrl() . '">' .
+                        ($includeIcon ?
+                            '<img src="' . $domain->getIcon() . '" class="domain-icon" />': ''
+                        ) . $domain->getName() .
+                        '</a>';
                 } else {
                     $domains[] = $domain->getName() . '(' . $domain->getUrl() . ')';
                 }

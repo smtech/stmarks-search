@@ -16,12 +16,16 @@ $config = new ConfigXML($config);
 
 $search = new SearchEngine($config->toArray('/config/engine')[0]);
 
-if ($courses = $config->toArray('/config/canvas/course')) {
-    foreach ($courses as $course) {
-        $search->addDomain(new CourseSearch(
-            $config->newInstanceOf(CanvasPest::class, '/config/canvas/api'),
-            $course['@attributes']
-        ));
+if ($canvases = $config->toArray('/config/canvas')) {
+    foreach ($canvases as $canvas) {
+        $api = new CanvasPest($canvas['api']['url'], $canvas['api']['token']);
+        if (count($canvas['course']) > 1) {
+            foreach ($canvas['course'] as $course) {
+                $search->addDomain(new CourseSearch($api, $course['@attributes']));
+            }
+        } else {
+            $search->addDomain(new CourseSearch($api, $canvas['course']['@attributes']));
+        }
     }
 }
 

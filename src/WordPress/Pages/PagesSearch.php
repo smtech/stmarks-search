@@ -26,7 +26,7 @@ class PagesSearch extends AbstractWordPressSearchDomain
     {
         $this->source = new SearchSource($this);
         $results = $this->processResponse(
-            $this->api->get('/pages', ['search' => $query]),
+            $this->getApi()->get('/pages', ['search' => $query]),
             $query
         );
 

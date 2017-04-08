@@ -2,45 +2,38 @@
 
 namespace smtech\StMarksSearch\Canvas\Courses;
 
+use Exception;
 use smtech\CanvasPest\CanvasPest;
-
-use smtech\StMarksSearch\AbstractSearchDomain;
+use smtech\StMarksSearch\Canvas\AbstractCanvasSearchDomain;
 
 /**
  * Parent object for Canvas course searches
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
-abstract class AbstractCourseSearchDomain extends AbstractSearchDomain
+abstract class AbstractCourseSearchDomain extends AbstractCanvasSearchDomain
 {
     /**
-     * API access object
-     * @var CanvasPest
-     */
-    protected $api;
-
-    /**
-     * Canvas Course ID
-     * @var integer
-     */
-    protected $id;
-
-    /**
-     * Construct a CourseSearch: `$params` must contain an `id` field, which is
-     * either a numeric Canvas course ID or an SIS ID formatted as
-     * `'sis_course_id:foo-bar'`
+     * Localize the general Canvas URL to a particular course (if necessary)
      *
-     * @inheritdoc
+     * Will "localize" the `url` parameter after initialization -- i.e. if the
+     * URL of the search domain is `https://canvas.instructure.com` and the ID
+     * is 43, the URL will be localized to
+     * `https://canvas.instructure.com/courses/43`
      *
-     * @param CanvasPest $api
-     * @param mixed[] $params
+     * @return void
      */
-    public function __construct(CanvasPest $api, $params)
+    protected function localizeUrl()
     {
-        parent::__construct($params);
-
-        $this->api = $api;
-        $this->id = $params['id'];
+        if (!preg_match('%.*/courses/\d+$%', $this->getUrl())) {
+            $id = $this->getId();
+            if (!is_numeric($id)) {
+                $course = $this->getApi()->get("/courses/$id");
+                assert(isset($course['id']), new Exception("Unknown course `id` parameter: $id"));
+                $id = $course['id'];
+            }
+            $this->setUrl($this->getUrl() . "/courses/{$id}");
+        }
     }
 }
 

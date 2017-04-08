@@ -35,6 +35,10 @@ class WordPressSearch extends SearchEngine
             $params['posts'] = true;
         }
 
+        if (!isset($params['icon'])) {
+            $params['icon'] = 'https://s.w.org/favicon.ico?2';
+        }
+
         parent::__construct($params);
 
         if ($params['posts']) {

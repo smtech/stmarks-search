@@ -32,6 +32,14 @@ abstract class AbstractSearchDomain
     protected $url;
 
     /**
+     * URL of the search domain's icon
+     *
+     * This will be rendered 16x16 pixels when displayed.
+     * @var string
+     */
+    protected $icon;
+
+    /**
      * Construct a SearchDomain
      *
      * Parameters are passed to this constuctor as an associative array of values, including, at a minimum:
@@ -53,17 +61,63 @@ abstract class AbstractSearchDomain
      */
     public function __construct($params)
     {
-        assert(
-            filter_var($params['url'], FILTER_VALIDATE_URL) !== false,
-            new Exception("Valid url parameter required, received:" . PHP_EOL . print_r($params, true))
-        );
-        $this->url = $params['url'];
+        assert(isset($params['url']), new Exception('`url` parameter required'));
+        $this->setUrl($params['url']);
 
+        assert(isset($params['name']), new Exception('`name` parameter required'));
+        $this->setName($params['name']);
+
+        if (isset($params['icon'])) {
+            $this->setIcon($params['icon']);
+        }
+    }
+
+    /**
+     * Update the URL of the search domain
+     *
+     * @used-by AbstractSearchDomain::__construct()
+     * @param string $url
+     * @throws Exception If `$url` is empty or is not a valid URL
+     */
+    protected function setUrl($url)
+    {
         assert(
-            !empty($params['name']),
-            new Exception('Non-empty name parameter required')
+            !empty($url) &&
+            filter_var($url, FILTER_VALIDATE_URL) !== false,
+            new Exception("Valid url parameter required, received:" . PHP_EOL . print_r($url, true))
         );
-        $this->name = $params['name'];
+        $this->url = $url;
+    }
+
+    /**
+     * Set the name of the search domain
+     *
+     * @used-by AbstractSearchDomain::__construct()
+     * @param string $name
+     * @throws Exception If `$name` is empty
+     */
+    protected function setName($name)
+    {
+        assert(
+            !empty($name),
+            new Exception('Non-empty parameter required, received:' . PHP_EOL . print_r($name, true))
+        );
+        $this->name = $name;
+    }
+
+    /**
+     * Set the icon URL for the search domain
+     *
+     *  Does nothing if `$url` is not a valid URL
+     *
+     * @used-by AbstractSearchDomain::__construct()
+     * @param string $icon
+     */
+    protected function setIcon($icon)
+    {
+        if (filter_var($icon, FILTER_VALIDATE_URL)) {
+            $this->icon = $icon;
+        }
     }
 
     /**
@@ -111,6 +165,16 @@ abstract class AbstractSearchDomain
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * URL of the icon of this search domain
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
     }
 }
 

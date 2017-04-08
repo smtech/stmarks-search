@@ -1,0 +1,35 @@
+<?php
+
+namespace smtech\StMarksSearch\Canvas;
+
+use smtech\CanvasPest\CanvasPest;
+use smtech\StMarksSearch\SearchEngine;
+
+/**
+ * Parent class for all Canvas search engines
+ *
+ * @author <SethBattis@stmarksschool.org>
+ */
+abstract class AbstractCanvasSearch extends SearchEngine
+{
+    /**
+     * Construct a Canvas search engine
+     *
+     * @inheritdoc
+     *
+     * @param CanvasPest $api
+     * @param mixed[] $params
+     */
+    public function __construct(CanvasPest $api, $params)
+    {
+        if (!isset($params['icon'])) {
+            $params['icon'] = 'https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico';
+        }
+
+        if (empty($params['url'])) {
+            $params['url'] = preg_replace('%^(.*)/api/v\d+$%', '$1', $api->base_url);
+        }
+
+        parent::__construct($params);
+    }
+}

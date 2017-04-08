@@ -26,7 +26,7 @@ class PostsSearch extends AbstractWordPressSearchDomain
     {
         $this->source = new SearchSource($this);
         $results = $this->processResponse(
-            $this->api->get('/posts', ['search' => $query]),
+            $this->getApi()->get('/posts', ['search' => $query]),
             $query
         );
 

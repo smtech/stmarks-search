@@ -36,7 +36,31 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
     {
         parent::__construct($params);
 
-        $this->api = new Pest("{$params['url']}/wp-json/wp/v2");
+        $this->setApi($this->getUrl());
+    }
+
+    /**
+     * Update the API access object
+     *
+     * @used-by AbstractWordPressSearchDomain::__construct()
+     * @param string $url
+     */
+    protected function setApi($url)
+    {
+        if (!preg_match('%.*/wp-json/wp/v\d+$%', $url)) {
+            $url = "$url/wp-json/wp/v2";
+        }
+        $this->api = new Pest($url);
+    }
+
+    /**
+     * Get the API access object
+     *
+     * @return Pest
+     */
+    public function getApi()
+    {
+        return $this->api;
     }
 
     /**

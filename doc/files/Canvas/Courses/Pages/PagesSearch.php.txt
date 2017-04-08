@@ -23,17 +23,15 @@ class PagesSearch extends AbstractCourseSearchDomain
      */
     public function search($query)
     {
-        /*
-         * Canvas doesn't accept search queries shorter than 3 characters
-         */
+        /* Canvas doesn't accept search queries shorter than 3 characters */
         if (strlen(trim($query)) < 3) {
             return [];
         }
 
         $source = new SearchSource($this);
         $results = [];
-        foreach ($this->api->get(
-            "courses/{$this->id}/pages",
+        foreach ($this->getApi()->get(
+            'courses/' . $this->getId() . '/pages',
             [
                 'search_term' => $query,
                 'sort' => 'updated_at',
@@ -41,7 +39,7 @@ class PagesSearch extends AbstractCourseSearchDomain
             ]
         ) as $page) {
             $results[] = new SearchResult(
-                "{$this->url}/pages/{$page['url']}",
+                $this->getUrl() . "/pages/{$page['url']}",
                 $this->relevance($page, $query),
                 $page['title'],
                 (empty($page['body']) ? '' : substr($page['body'], 0, 255)),
