@@ -6,7 +6,7 @@
             <p>
                 <a href="{$result->getUrl()}">{$result->getTitle()}</a>
                 <span class="label label-default rationale" data-toggle="tooltip" data-placement="bottom" title="{$result->getRelevance()->getRationale(PHP_EOL)}">
-                    {$result->getRelevance()->getScore()}
+                    {$result->getRelevance()->getScore()|string_format:"%.2f"}
                 </span>
                 <span class="pull-right">
                     <small>from <a href="{$result->getSource()->getUrl()}">{$result->getSource()->getName()}</a></small>

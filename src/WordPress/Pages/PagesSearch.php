@@ -63,11 +63,7 @@ class PagesSearch extends AbstractWordPressSearchDomain
     {
         $relevance = new Relevance();
 
-        if (preg_match("/^{$query}$/i", $page['title']['rendered'])) {
-            $relevance->add(5, 'exact title match');
-        } elseif (preg_match("/$query/i", $page['title']['rendered'])) {
-            $relevance->add(2, 'partial title match');
-        }
+        $relevance->add(Relevance::stringProportion($page['title']['rendered'], $query), 'title match');
 
         if (($count = substr_count(strtolower($page['content']['rendered']), strtolower($query))) > 0) {
             $relevance->add($count * 0.01, "$count occurrences in body");

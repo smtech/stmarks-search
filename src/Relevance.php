@@ -9,6 +9,8 @@ namespace smtech\StMarksSearch;
  */
 class Relevance
 {
+    const EXACT_MATCH = 5;
+
     /**
      * Relevance score
      *
@@ -52,7 +54,7 @@ class Relevance
     public function add($scoreIncrement, $rationale)
     {
         $this->score += $scoreIncrement;
-        $this->rationales[] = "$scoreIncrement: $rationale";
+        $this->rationales[] = round($scoreIncrement, 2) . ": $rationale";
     }
 
     /**
@@ -75,5 +77,14 @@ class Relevance
     public function getRationale($separator = ', ')
     {
         return implode($separator, $this->rationales);
+    }
+
+    public static function stringProportion($haystack, $needle)
+    {
+        if (preg_match("/$needle/i", $haystack, $matches) !== 1) {
+            return 0.0;
+        } else {
+            return self::EXACT_MATCH * strlen($needle) * count($matches) / strlen($haystack);
+        }
     }
 }

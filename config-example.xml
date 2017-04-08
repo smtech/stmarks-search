@@ -8,7 +8,7 @@
             <url>https://canvas.instructure.com/api/v1</url>
             <token>gesundheit!</token>
         </api>
-        <course id="sis_course_id:faculty-resources" pages="true" announcements="true" />
+        <course name="Faculty Resources" id="sis_course_id:faculty-resources" pages="true" announcements="true" />
     </canvas>
     <wordpress>
         <blog name="Help Desk" url="https://helpdesk.stmarksschool.org" posts="true" />

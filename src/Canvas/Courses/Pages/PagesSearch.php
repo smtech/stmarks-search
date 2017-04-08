@@ -60,11 +60,9 @@ class PagesSearch extends AbstractCourseSearchDomain
     protected function relevance(CanvasObject $page, $query)
     {
         $relevance = new Relevance();
-        if (preg_match("/^{$query}$/i", $page['title'])) {
-            $relevance->add(5, 'exact title match');
-        } elseif (preg_match("/{$query}/i", $page["title"])) {
-            $relevance->add(2, 'partial title match');
-        }
+
+        $relevance->add(Relevance::stringProportion($page['title'], $query), 'title match');
+
         return $relevance;
     }
 }
