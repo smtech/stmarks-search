@@ -7,6 +7,7 @@ use smtech\CanvasPest\CanvasPest;
 use smtech\StMarksSearch\SearchEngine;
 use smtech\StMarksSearch\Canvas\Courses\CourseSearch;
 use smtech\StMarksSearch\WordPress\WordPressSearch;
+use smtech\StMarksSearch\LibApps\LibGuides\LibGuidesSearch;
 
 if (empty($config)) {
     $config = __DIR__ . '/config.xml';
@@ -32,5 +33,11 @@ if ($canvases = $config->toArray('/config/canvas')) {
 if ($blogs = $config->toArray('/config/wordpress/blog')) {
     foreach ($blogs as $blog) {
         $search->addDomain(new WordPressSearch($blog['@attributes']));
+    }
+}
+
+if ($libguides = $config->toArray('/config/libapps/libguides')) {
+    foreach ($libguides as $libguide) {
+        $search->addDomain(new LibGuidesSearch($libguide['@attributes']));
     }
 }
