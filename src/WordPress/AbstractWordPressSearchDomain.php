@@ -2,7 +2,6 @@
 
 namespace smtech\StMarksSearch\WordPress;
 
-use Battis\Educoder\Pest;
 use smtech\StMarksSearch\AbstractSearchDomain;
 use smtech\StMarksSearch\SearchResult;
 use smtech\StMarksSearch\SearchSource;
@@ -16,7 +15,7 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
 {
     /**
      * API access object
-     * @var Pest
+     * @var WordPressPest
      */
     protected $api;
 
@@ -47,16 +46,13 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
      */
     protected function setApi($url)
     {
-        if (!preg_match('%.*/wp-json/wp/v\d+$%', $url)) {
-            $url = "$url/wp-json/wp/v2";
-        }
-        $this->api = new Pest($url);
+        $this->api = new WordPressPest($url);
     }
 
     /**
      * Get the API access object
      *
-     * @return Pest
+     * @return WordPressPest
      */
     public function getApi()
     {
@@ -89,7 +85,7 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
     {
         $results = [];
         do {
-            $items = json_decode($response, true);
+            $items = $response;
             foreach ($items as $item) {
                 $results[] = $this->processItem($item, $query);
             }
