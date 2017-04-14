@@ -30,22 +30,27 @@ class PagesSearch extends AbstractCourseSearchDomain
 
         $source = new SearchSource($this);
         $results = [];
-        foreach ($this->getApi()->get(
+
+        $response = $this->getApi()->get(
             'courses/' . $this->getId() . '/pages',
             [
                 'search_term' => $query,
                 'sort' => 'updated_at',
                 'published' => true
             ]
-        ) as $page) {
-            $results[] = new SearchResult(
-                $this->getUrl() . "/pages/{$page['url']}",
-                $this->relevance($page, $query),
-                $page['title'],
-                (empty($page['body']) ? '' : substr($page['body'], 0, 255)),
-                $source
-            );
+        );
+        if (is_array($response)) {
+            foreach ($response as $page) {
+                $results[] = new SearchResult(
+                    $this->getUrl() . "/pages/{$page['url']}",
+                    $this->relevance($page, $query),
+                    $page['title'],
+                    (empty($page['body']) ? '' : substr($page['body'], 0, 255)),
+                    $source
+                );
+            }
         }
+
         $this->sortByRelevance($results);
         return $results;
     }

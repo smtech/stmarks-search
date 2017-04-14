@@ -21,7 +21,55 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -96,55 +144,55 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-374253778"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1188687199"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-374253778" class="accordion-body collapse in">
+            <div id="namespace-1188687199" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2087763919"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2084587991"></a>
                                 <a href="../namespaces/smtech.html" style="margin-left: 30px; padding-left: 0">smtech</a>
             </div>
-            <div id="namespace-2087763919" class="accordion-body collapse ">
+            <div id="namespace-2084587991" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-940766911"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1404008632"></a>
                                 <a href="../namespaces/smtech.StMarksSearch.html" style="margin-left: 30px; padding-left: 0">StMarksSearch</a>
             </div>
-            <div id="namespace-940766911" class="accordion-body collapse ">
+            <div id="namespace-1404008632" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-241938581"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-801812764"></a>
                                 <a href="../namespaces/smtech.StMarksSearch.Canvas.html" style="margin-left: 30px; padding-left: 0">Canvas</a>
             </div>
-            <div id="namespace-241938581" class="accordion-body collapse ">
+            <div id="namespace-801812764" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1290627188"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1339248854"></a>
                                 <a href="../namespaces/smtech.StMarksSearch.Canvas.Courses.html" style="margin-left: 30px; padding-left: 0">Courses</a>
             </div>
-            <div id="namespace-1290627188" class="accordion-body collapse ">
+            <div id="namespace-1339248854" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-791193427"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1031628632"></a>
                                 <a href="../namespaces/smtech.StMarksSearch.Canvas.Courses.Pages.html" style="margin-left: 30px; padding-left: 0">Pages</a>
             </div>
-            <div id="namespace-791193427" class="accordion-body collapse ">
+            <div id="namespace-1031628632" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -179,19 +227,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1095170141"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-269253247"></a>
                                 <a href="../namespaces/smtech.StMarksSearch.LibApps.html" style="margin-left: 30px; padding-left: 0">LibApps</a>
             </div>
-            <div id="namespace-1095170141" class="accordion-body collapse ">
+            <div id="namespace-269253247" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1301789405"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-967795260"></a>
                                 <a href="../namespaces/smtech.StMarksSearch.LibApps.LibGuides.html" style="margin-left: 30px; padding-left: 0">LibGuides</a>
             </div>
-            <div id="namespace-1301789405" class="accordion-body collapse ">
+            <div id="namespace-967795260" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -216,19 +264,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-662804569"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1993478035"></a>
                                 <a href="../namespaces/smtech.StMarksSearch.WordPress.html" style="margin-left: 30px; padding-left: 0">WordPress</a>
             </div>
-            <div id="namespace-662804569" class="accordion-body collapse ">
+            <div id="namespace-1993478035" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-728917181"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1562443034"></a>
                                 <a href="../namespaces/smtech.StMarksSearch.WordPress.Pages.html" style="margin-left: 30px; padding-left: 0">Pages</a>
             </div>
-            <div id="namespace-728917181" class="accordion-body collapse ">
+            <div id="namespace-1562443034" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -243,10 +291,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-364577211"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1111052724"></a>
                                 <a href="../namespaces/smtech.StMarksSearch.WordPress.Posts.html" style="margin-left: 30px; padding-left: 0">Posts</a>
             </div>
-            <div id="namespace-364577211" class="accordion-body collapse ">
+            <div id="namespace-1111052724" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -303,41 +351,38 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content namespace">
+                <div class="span8 content file">
                     <nav>
-                                                <a href="../namespaces/smtech.StMarksSearch.Canvas.Courses.html">\smtech\StMarksSearch\Canvas\Courses</a>
-                                            </nav>
-                    <h1><small>\smtech\StMarksSearch\Canvas\Courses</small>Pages</h1>
+                                                                    </nav>
 
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+                    <h1><small>LibApps/LibGuides</small>LibGuidesSearch.php</h1>
+                    <p><em></em></p>
                     
+
                     
                     
                                         <h2>Classes</h2>
                     <table class="table table-hover">
                                             <tr>
-                            <td><a href="../classes/smtech.StMarksSearch.Canvas.Courses.Pages.PagesSearch.html">PagesSearch</a></td>
-                            <td><em>Search a Canvas course&#039;s wiki pages</em></td>
+                            <td><a href="../classes/smtech.StMarksSearch.LibApps.LibGuides.LibGuidesSearch.html">LibGuidesSearch</a></td>
+                            <td><em>LibGuides search domain</em></td>
                         </tr>
                                         </table>
                                     </div>
 
                 <aside class="span4 detailsbar">
                     <dl>
-                        <dt>Namespace hierarchy</dt>
-                        <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                    <div class="namespace-wrapper"><a href="../namespaces/default.html">\</a></div>
-                                                            
-                                    <div class="namespace-wrapper"><a href="../namespaces/smtech.html">\smtech</a></div>
-                                                            
-                                    <div class="namespace-wrapper"><a href="../namespaces/smtech.StMarksSearch.html">\smtech\StMarksSearch</a></div>
-                                                            
-                                    <div class="namespace-wrapper"><a href="../namespaces/smtech.StMarksSearch.Canvas.html">\smtech\StMarksSearch\Canvas</a></div>
-                                                            
-                                    <div class="namespace-wrapper"><a href="../namespaces/smtech.StMarksSearch.Canvas.Courses.html">\smtech\StMarksSearch\Canvas\Courses</a></div>
-                                                                                        <div class="namespace-wrapper">\smtech\StMarksSearch\Canvas\Courses\Pages</div>
-                        </dd>
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                        
+                        
                     </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                            </table>
+
                 </aside>
             </div>
 
@@ -345,6 +390,16 @@
             
         </div>
     </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label"></h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/LibApps/LibGuides/LibGuidesSearch.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
 
     <footer class="row-fluid">
         <section class="span10 offset2">

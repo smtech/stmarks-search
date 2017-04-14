@@ -86,8 +86,10 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
         $results = [];
         do {
             $items = $response;
-            foreach ($items as $item) {
-                $results[] = $this->processItem($item, $query);
+            if (is_array($items)) {
+                foreach ($items as $item) {
+                    $results[] = $this->processItem($item, $query);
+                }
             }
 
             $link = $this->api->lastHeader('Link');

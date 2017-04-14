@@ -79,6 +79,15 @@ class Relevance
         return implode($separator, $this->rationales);
     }
 
+    /**
+     * Calculate what proportion of the `$haystack` is made up of `$needle`
+     *
+     * For example `Go Dog Go!` is 40% `Go`, `Hello World` is 100% `Hello World`
+     *
+     * @param string $haystack
+     * @param string $needle
+     * @return float
+     */
     public static function stringProportion($haystack, $needle)
     {
         if (preg_match("/$needle/i", $haystack, $matches) !== 1) {

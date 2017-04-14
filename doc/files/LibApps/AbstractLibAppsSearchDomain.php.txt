@@ -67,3 +67,4 @@ abstract class AbstractLibAppsSearchDomain extends AbstractSearchDomain
         return $this->api;
     }
 }
+
