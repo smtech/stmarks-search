@@ -83,11 +83,11 @@ abstract class AbstractSearchDomain
      */
     protected function setUrl($url)
     {
-        assert(
-            !empty($url) &&
-            filter_var($url, FILTER_VALIDATE_URL) !== false,
-            new Exception("Valid url parameter required, received:" . PHP_EOL . print_r($url, true))
-        );
+        if (empty($url) ||
+            filter_var($url, FILTER_VALIDATE_URL) === false
+        ) {
+            throw new Exception("Valid url parameter required, received:" . PHP_EOL . print_r($url, true));
+        }
         $this->url = $url;
     }
 
@@ -100,10 +100,9 @@ abstract class AbstractSearchDomain
      */
     protected function setName($name)
     {
-        assert(
-            !empty($name),
-            new Exception('Non-empty parameter required, received:' . PHP_EOL . print_r($name, true))
-        );
+        if (empty($name)) {
+            throw new Exception('Non-empty parameter required, received:' . PHP_EOL . print_r($name, true));
+        }
         $this->name = $name;
     }
 

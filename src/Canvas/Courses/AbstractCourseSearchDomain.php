@@ -22,6 +22,7 @@ abstract class AbstractCourseSearchDomain extends AbstractCanvasSearchDomain
      * `https://canvas.instructure.com/courses/43`
      *
      * @return void
+     * @throws Exception if `id` param does not result in valid Canvas course
      */
     protected function localizeUrl()
     {
@@ -29,7 +30,9 @@ abstract class AbstractCourseSearchDomain extends AbstractCanvasSearchDomain
             $id = $this->getId();
             if (!is_numeric($id)) {
                 $course = $this->getApi()->get("/courses/$id");
-                assert(isset($course['id']), new Exception("Unknown course `id` parameter: $id"));
+                if (!isset($course['id'])) {
+                    throw new Exception("Unknown course `id` parameter: '$id'");
+                }
                 $id = $course['id'];
             }
             $this->setUrl($this->getUrl() . "/courses/{$id}");

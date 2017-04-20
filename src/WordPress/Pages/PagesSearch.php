@@ -43,13 +43,13 @@ class PagesSearch extends AbstractWordPressSearchDomain
      */
     public function processItem($page, $query)
     {
-        return new SearchResult(
-            $page['link'],
-            $this->relevance($page, $query),
-            $page['title']['rendered'],
-            preg_replace('@<p class="continue-reading-button">.*</p>@', '', $page['excerpt']['rendered']),
-            $this->source
-        );
+        return new SearchResult([
+            'url' => $page['link'],
+            'relevance' => $this->relevance($page, $query),
+            'title' => $page['title']['rendered'],
+            'description' => preg_replace('@<p class="continue-reading-button">.*</p>@', '', $page['excerpt']['rendered']),
+            'source' => $this->source
+        ]);
     }
 
     /**

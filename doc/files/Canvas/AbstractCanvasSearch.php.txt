@@ -4,6 +4,7 @@ namespace smtech\StMarksSearch\Canvas;
 
 use Exception;
 use smtech\CanvasPest\CanvasPest;
+use smtech\StMarksSearch\RequireParameter;
 use smtech\StMarksSearch\SearchEngine;
 
 /**
@@ -26,13 +27,16 @@ abstract class AbstractCanvasSearch extends SearchEngine
     {
         $this->requireCanvasPestParameter($params);
 
-        if (!isset($params['icon'])) {
-            $params['icon'] = 'https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico';
-        }
-
-        if (empty($params['url'])) {
-            $params['url'] = preg_replace('%^(.*)/api/v\d+$%', '$1', $params['api']->base_url);
-        }
+        $this->defaultParameter(
+            $params,
+            'icon',
+            'https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico'
+        );
+        $this->defaultParameter(
+            $params,
+            'url',
+            preg_replace('%^(.*)/api/v\d+$%', '$1', $this->getApi()->base_url)
+        );
 
         parent::__construct($params);
     }

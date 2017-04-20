@@ -31,6 +31,7 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
      */
     public function __construct($params)
     {
+        $this->requireParameter($params, 'id');
         $this->requireCanvasPestParameter($params);
 
         if (empty($params['url'])) {
@@ -39,7 +40,6 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
 
         parent::__construct($params);
 
-        assert(isset($params['id']), new Exception('`id` parameter required'));
         $this->setId($params['id']);
     }
 
@@ -51,11 +51,11 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
      */
     protected function setId($id)
     {
-        assert(
-            is_numeric($id) ||
-                preg_match('/^sis_[a-z]+_id:\S+$/i', $id),
-            new Exception('ID must be a Canvas ID or SIS ID, received:' . PHP_EOL . print_r($id, true))
-        );
+        if (!is_numeric($id) &&
+            !preg_match('/^sis_[a-z]+_id:\S+$/i', $id)
+        ) {
+            throw new Exception('ID must be a Canvas ID or SIS ID, received:' . PHP_EOL . print_r($id, true));
+        }
         $this->id = $id;
     }
 

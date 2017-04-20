@@ -42,13 +42,12 @@ class PagesSearch extends AbstractCourseSearchDomain
         );
         if (is_a($response, CanvasArray::class)) {
             foreach ($response as $page) {
-                $results[] = new SearchResult(
-                    $this->getUrl() . "/pages/{$page['url']}",
-                    $this->relevance($page, $query),
-                    $page['title'],
-                    (empty($page['body']) ? '' : substr(strip_tags($page['body']), 0, 255) . '&hellip;'),
-                    $source
-                );
+                $results[] = new SearchResult([
+                    'url' => $this->getUrl() . "/pages/{$page['url']}",
+                    'relevance' => $this->relevance($page, $query),
+                    'title' => $page['title'],
+                    'source' => $source
+                ]);
             }
         }
 

@@ -38,10 +38,13 @@ trait RequireCanvasPestParameter
      * Update the `$api` field
      *
      * @param CanvasPest $api
+     * @throws Exception If `$api` is `NULL`
      */
     protected function setApi(CanvasPest $api)
     {
-        assert($api !== null, new Exception('Initialized CanvasPest object required'));
+        if ($api === null) {
+            throw new Exception('Initialized CanvasPest object required');
+        }
         $this->api = $api;
     }
 

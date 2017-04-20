@@ -25,16 +25,17 @@ trait RequireParameter
      */
     protected function requireParameter($params, $key, $class = false)
     {
-        assert(isset($params[$key]), new Exception("`$key` param required"));
+        if (!isset($params[$key])) {
+            throw new Exception("`$key` param required");
+        }
 
         if ($class !== false && is_string($class)) {
-            assert(
-                is_a($params[$key], $class),
-                new Exception(
+            if (!is_a($params[$key], $class)) {
+                throw new Exception(
                     "`$key` must be an instance of `$class`, instance of " .
                     get_class($params[$key]) . ' passed instead'
-                )
-            );
+                );
+            }
         }
     }
 
@@ -51,6 +52,24 @@ trait RequireParameter
     protected function forceBooleanParameter($params, $key)
     {
         return isset($params[$key]) && filter_var($params[$key], FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set a parameter to a default value if it is not set
+     *
+     * @param mixed[string] $params
+     * @param string $key
+     * @param mixed $value
+     * @param string|false $class
+     * @return void
+     */
+    protected function defaultParameter(&$params, $key, $value, $class = false)
+    {
+        try {
+            $this->requireParameter($params, $key, $class);
+        } catch (Exception $e) {
+            $params[$key] = $value;
+        }
     }
 }
 

@@ -9,6 +9,8 @@ namespace smtech\StMarksSearch;
  */
 class SearchResult
 {
+    use RequireParameter;
+
     /**
      * URL of the search result
      * @var string
@@ -44,22 +46,35 @@ class SearchResult
 
     /**
      * Construct a SearchResult
-     * @param string $url
-     * @param Relevance $relevance
-     * @param string $title
-     * @param string $description
-     * @param SearchSource $source
+     *
+     * Expects an associative parameter array:
+     *
+     * ```
+     * [
+     *   'url' => URL of the search result as a string,
+     *   'title' => Title of the search result as a string,
+     *   'relevance' => instance of `Relevance`,
+     *   'source' => instance of `SearchSource`,
+     *   'description' => Optional: search result descriptin as a string
+     * ]
+     * ```
+     *
+     * @param mixed[string] $params
      */
-    public function __construct($url, Relevance $relevance, $title, $description, SearchSource $source)
+    public function __construct($params)
     {
-        /*
-         * TODO validate/clean parameters
-         */
-        $this->relevance = $relevance;
-        $this->title = $title;
-        $this->description = $description;
-        $this->url = $url;
-        $this->source = $source;
+        $this->requireParameter($params, 'url');
+        $this->requireParameter($params, 'title');
+        $this->requireParameter($params, 'relevance', Relevance::class);
+        $this->requireParameter($params, 'source', SearchSource::class);
+
+        $this->defaultParameter($params, 'description', '∅');
+
+        $this->url = $params['url'];
+        $this->title = $params['title'];
+        $this->relevance = $params['relevance'];
+        $this->source = $params['source'];
+        $this->description = $params['description'];
     }
 
     /**

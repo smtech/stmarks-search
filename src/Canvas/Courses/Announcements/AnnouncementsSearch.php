@@ -42,13 +42,13 @@ class AnnouncementsSearch extends AbstractCourseSearchDomain
 
         if (is_a($response, CanvasArray::class)) {
             foreach ($response as $announcement) {
-                $results[] = new SearchResult(
-                    $announcement['html_url'],
-                    $this->relevance($announcement, $query),
-                    $announcement['title'],
-                    (empty($announcement['message']) ? '' : substr(str_replace(PHP_EOL, ' ', strip_tags($announcement['message'])), 0, 255) . '&hellip;'),
-                    $source
-                );
+                $results[] = new SearchResult([
+                    'url' => $announcement['html_url'],
+                    'relevance' => $this->relevance($announcement, $query),
+                    'title' => $announcement['title'],
+                    'description' => (empty($announcement['message']) ? '' : substr(str_replace(PHP_EOL, ' ', strip_tags($announcement['message'])), 0, 255) . '&hellip;'),
+                    'source' => $source
+                ]);
             }
         }
 

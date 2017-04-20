@@ -43,13 +43,13 @@ class PostsSearch extends AbstractWordPressSearchDomain
      */
     protected function processItem($post, $query)
     {
-        return new SearchResult(
-            $post['link'],
-            $this->relevance($post, $query),
-            $post['title']['rendered'],
-            preg_replace('@<p class="continue-reading-button">.*</p>@', '', $post['excerpt']['rendered']),
-            $this->source
-        );
+        return new SearchResult([
+            'url' => $post['link'],
+            'relevance' => $this->relevance($post, $query),
+            'title' => $post['title']['rendered'],
+            'description' => preg_replace('@<p class="continue-reading-button">.*</p>@', '', $post['excerpt']['rendered']),
+            'source' => $this->source
+        ]);
     }
 
     /**

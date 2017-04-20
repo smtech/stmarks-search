@@ -28,19 +28,17 @@ abstract class AbstractLibAppsSearchDomain extends AbstractSearchDomain
      * @inheritdoc
      *
      * @param mixed[] $params
+     * @throws Exception If `site_id` parameter is not numeric LibApps ID
      */
     public function __construct($params)
     {
         $this->requireParameter($params, 'site_id');
         $this->requireParameter($params, 'key');
 
-        assert(
-            is_numeric($params['site_id']),
-            new Exception('`site_id` parameter must be a valid numeric LibApps ID')
-        );
+        $this->defaultParameter($params, 'icon', 'https://stmarksschool-ma.libapps.com/favicon.ico');
 
-        if (!isset($params['icon'])) {
-            $params['icon'] = 'https://stmarksschool-ma.libapps.com/favicon.ico';
+        if (!is_numeric($params['site_id'])) {
+            throw new Exception('`site_id` parameter must be a valid numeric LibApps ID');
         }
 
         parent::__construct($params);

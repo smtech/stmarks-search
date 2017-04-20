@@ -33,13 +33,13 @@ class LibGuidesSearch extends AbstractLibAppsSearchDomain
         );
         if (is_array($response)) {
             foreach ($response as $result) {
-                $results[] = new SearchResult(
-                    $result['url'],
-                    $this->relevance($result, $query),
-                    $result['name'],
-                    $result['description'],
-                    $source
-                );
+                $results[] = new SearchResult([
+                    'url' => $result['url'],
+                    'relevance' => $this->relevance($result, $query),
+                    'title' => $result['name'],
+                    'description' => $result['description'],
+                    'source' => $source
+                ]);
             }
         }
 
