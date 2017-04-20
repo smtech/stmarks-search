@@ -1,6 +1,6 @@
 <?php
 
-namespace smtech\StMarksSearch\Canvas\Courses\Pages;
+namespace smtech\StMarksSearch\Canvas\Courses\Announcements;
 
 use smtech\CanvasPest\CanvasArray;
 use smtech\CanvasPest\CanvasObject;
@@ -10,14 +10,14 @@ use smtech\StMarksSearch\SearchSource;
 use smtech\StMarksSearch\Canvas\Courses\AbstractCourseSearchDomain;
 
 /**
- * Search a Canvas course's wiki pages
+ * Search a Canvas course's announcements
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
-class PagesSearch extends AbstractCourseSearchDomain
+class AnnouncementsSearch extends AbstractCourseSearchDomain
 {
     /**
-     * Search for `$query` among the wiki pages
+     * Search for `$query` among the announcements
      *
      * @param string $query
      * @return SearchResult[] Ordered by descending relevance
@@ -33,20 +33,20 @@ class PagesSearch extends AbstractCourseSearchDomain
         $results = [];
 
         $response = $this->getApi()->get(
-            'courses/' . $this->getId() . '/pages',
+            'courses/' . $this->getId() . '/discussion_topics',
             [
                 'search_term' => $query,
-                'sort' => 'updated_at',
-                'published' => true
+                'only_announcements' => true
             ]
         );
+
         if (is_a($response, CanvasArray::class)) {
-            foreach ($response as $page) {
+            foreach ($response as $announcement) {
                 $results[] = new SearchResult(
-                    $this->getUrl() . "/pages/{$page['url']}",
-                    $this->relevance($page, $query),
-                    $page['title'],
-                    (empty($page['body']) ? '' : substr(strip_tags($page['body']), 0, 255) . '&hellip;'),
+                    $announcement['html_url'],
+                    $this->relevance($announcement, $query),
+                    $announcement['title'],
+                    (empty($announcement['message']) ? '' : substr(str_replace(PHP_EOL, ' ', strip_tags($announcement['message'])), 0, 255) . '&hellip;'),
                     $source
                 );
             }
@@ -57,17 +57,21 @@ class PagesSearch extends AbstractCourseSearchDomain
     }
 
     /**
-     * Calculate the relevance of a particular page
+     * Calculate the relevance of a particular announcement
      *
-     * @param CanvasObject $page
+     * @param CanvasObject $announcement
      * @param string $query
      * @return Relevance
      */
-    protected function relevance(CanvasObject $page, $query)
+    protected function relevance($announcement, $query)
     {
         $relevance = new Relevance();
 
-        $relevance->add(Relevance::stringProportion($page['title'], $query), 'title match');
+        $relevance->add(Relevance::stringProportion($announcement['title'], $query), 'title match');
+
+        if (($count = substr_count(strtolower($announcement['message']), strtolower($query))) > 0) {
+            $relevance->add($count * 0.01, "$count occurrences in body");
+        }
 
         return $relevance;
     }

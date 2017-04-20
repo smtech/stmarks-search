@@ -5,6 +5,7 @@ namespace smtech\StMarksSearch\Canvas\Courses;
 use smtech\CanvasPest\CanvasPest;
 use smtech\StMarksSearch\SearchEngine;
 use smtech\StMarksSearch\Canvas\AbstractCanvasSearch;
+use smtech\StMarksSearch\Canvas\Courses\Announcements\AnnouncementsSearch;
 use smtech\StMarksSearch\Canvas\Courses\Pages\PagesSearch;
 
 /**
@@ -27,10 +28,15 @@ class CourseSearch extends AbstractCanvasSearch
     {
         parent::__construct($api, $params);
 
-        $params['pages'] = isset($params['pages']) && filter_var($params['pages'], FILTER_VALIDATE_BOOLEAN);
+        $params['pages'] = $this->forceBoolean($params, 'pages');
+        $params['announcements'] = $this->forceBoolean($params, 'announcements');
 
         if ($params['pages']) {
             $this->addDomain(new PagesSearch($api, $params));
+        }
+
+        if ($params['announcements']) {
+            $this->addDomain(new AnnouncementsSearch($api, $params));
         }
     }
 }

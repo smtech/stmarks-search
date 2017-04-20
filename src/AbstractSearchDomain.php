@@ -176,4 +176,18 @@ abstract class AbstractSearchDomain
     {
         return $this->icon;
     }
+
+    /**
+     * Force a boolean result from a particular parameter key
+     *
+     * @param mixed[string] $params
+     * @param string $key    [description]
+     * @return boolean `TRUE` iff `$params[$key]` exists and has a true value
+     *                        (`1`, `'yes'`, `'true'`, `true`, etc.), `FALSE`
+     *                        otherwise.
+     */
+    protected function forceBoolean($params, $key)
+    {
+        return isset($params[$key]) && filter_var($params[$key], FILTER_VALIDATE_BOOLEAN);
+    }
 }

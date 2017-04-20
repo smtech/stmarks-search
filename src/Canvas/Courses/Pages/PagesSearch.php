@@ -2,6 +2,7 @@
 
 namespace smtech\StMarksSearch\Canvas\Courses\Pages;
 
+use smtech\CanvasPest\CanvasArray;
 use smtech\CanvasPest\CanvasObject;
 use smtech\StMarksSearch\Relevance;
 use smtech\StMarksSearch\SearchResult;
@@ -39,13 +40,13 @@ class PagesSearch extends AbstractCourseSearchDomain
                 'published' => true
             ]
         );
-        if (is_array($response)) {
+        if (is_a($response, CanvasArray::class)) {
             foreach ($response as $page) {
                 $results[] = new SearchResult(
                     $this->getUrl() . "/pages/{$page['url']}",
                     $this->relevance($page, $query),
                     $page['title'],
-                    (empty($page['body']) ? '' : substr($page['body'], 0, 255)),
+                    (empty($page['body']) ? '' : substr(strip_tags($page['body']), 0, 255) . '&hellip;'),
                     $source
                 );
             }
