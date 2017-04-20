@@ -30,7 +30,7 @@ if (empty($query) || $query == __FILE__ || isset($options['h']) || isset($option
 require_once 'common.inc.php';
 
 
-echo PHP_EOL . 'Searching ' . $search->getDomains() . " for '$query'" . PHP_EOL . PHP_EOL;
+echo PHP_EOL . 'Searching ' . $search->getDomains(false) . " for '$query'" . PHP_EOL . PHP_EOL;
 $results = $search->search($query);
 foreach ($results as $result) {
     echo $result->getTitle() .
