@@ -17,6 +17,7 @@ use smtech\StMarksSearch\Canvas\Courses\Pages\PagesSearch;
 class CourseSearch extends AbstractCanvasSearch
 {
     use RequireParameter;
+    use DeriveCourseUrlFromId;
 
     /**
      * Construct a CourseSearch: may have a `pages` field to indicate that
@@ -28,7 +29,17 @@ class CourseSearch extends AbstractCanvasSearch
      */
     public function __construct($params)
     {
+        $this->requireParameter($params, 'id');
+
         parent::__construct($params);
+
+        $this->setId($params['id']);
+        $this->setUrl(
+            $this->deriveCourseUrl(
+                $this->getUrl(),
+                $this->getApi()
+            )
+        );
 
         $params['pages'] = $this->forceBooleanParameter($params, 'pages');
         $params['announcements'] = $this->forceBooleanParameter($params, 'announcements');
