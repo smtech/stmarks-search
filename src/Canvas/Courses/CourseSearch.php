@@ -3,6 +3,7 @@
 namespace smtech\StMarksSearch\Canvas\Courses;
 
 use smtech\CanvasPest\CanvasPest;
+use smtech\StMarksSearch\RequireParameter;
 use smtech\StMarksSearch\SearchEngine;
 use smtech\StMarksSearch\Canvas\AbstractCanvasSearch;
 use smtech\StMarksSearch\Canvas\Courses\Announcements\AnnouncementsSearch;
@@ -15,28 +16,29 @@ use smtech\StMarksSearch\Canvas\Courses\Pages\PagesSearch;
  */
 class CourseSearch extends AbstractCanvasSearch
 {
+    use RequireParameter;
+
     /**
      * Construct a CourseSearch: may have a `pages` field to indicate that
      * course pages should be searched.
      *
      * @inheritdoc
      *
-     * @param CanvasPest $api
-     * @param mixed[] $params
+     * @param mixed[string] $params
      */
-    public function __construct(CanvasPest $api, $params)
+    public function __construct($params)
     {
-        parent::__construct($api, $params);
+        parent::__construct($params);
 
-        $params['pages'] = $this->forceBoolean($params, 'pages');
-        $params['announcements'] = $this->forceBoolean($params, 'announcements');
+        $params['pages'] = $this->forceBooleanParameter($params, 'pages');
+        $params['announcements'] = $this->forceBooleanParameter($params, 'announcements');
 
         if ($params['pages']) {
-            $this->addDomain(new PagesSearch($api, $params));
+            $this->addDomain(new PagesSearch($params));
         }
 
         if ($params['announcements']) {
-            $this->addDomain(new AnnouncementsSearch($api, $params));
+            $this->addDomain(new AnnouncementsSearch($params));
         }
     }
 }

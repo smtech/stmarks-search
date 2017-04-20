@@ -13,11 +13,7 @@ use smtech\StMarksSearch\AbstractSearchDomain;
  */
 abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
 {
-    /**
-     * API access object
-     * @var CanvasPest
-     */
-    protected $api;
+    use RequireCanvasPestParameter;
 
     /**
      * Canvas ID or SIS ID of the Canvas object
@@ -26,18 +22,16 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
     protected $id;
 
     /**
-     * Construct a CanvasSearchDomain from `$params`, requires `id` param, will
-     * extract `url` param from `$api` if necessary.
+     * Construct a CanvasSearchDomain from `$params`, requires `id` and `api`
+     * params, will extract `url` param from `api`, if necessary.
      *
      * @inheritdoc
      *
-     * @param CanvasPest $api
-     * @param mixed[] $params
+     * @param mixed[string] $params
      */
-    public function __construct(CanvasPest $api, $params)
+    public function __construct($params)
     {
-        /* API access may be required to process $params */
-        $this->setApi($api);
+        $this->requireCanvasPestParameter($params);
 
         if (empty($params['url'])) {
             $params['url'] = preg_replace('%^(.*)/api/v\d+$%', '$1', $this->getApi()->base_url);
@@ -47,30 +41,6 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
 
         assert(isset($params['id']), new Exception('`id` parameter required'));
         $this->setId($params['id']);
-
-        $this->localizeUrl();
-    }
-
-    /**
-     * Update the `$api` field
-     *
-     * @used-by AbstractCanvasSearchDomain::__construct()
-     * @param CanvasPest $api
-     */
-    protected function setApi(CanvasPest $api)
-    {
-        assert($api !== null, new Exception('Initialized CanvasPest object required'));
-        $this->api = $api;
-    }
-
-    /**
-     * Get the Canvas API field
-     *
-     * @return CanvasPest
-     */
-    protected function getApi()
-    {
-        return $this->api;
     }
 
     /**
@@ -98,12 +68,5 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
     {
         return $this->id;
     }
-
-    /**
-     * Localize the object URL field within the Canvas instance
-
-     * @return void
-     */
-    abstract protected function localizeUrl();
 }
 

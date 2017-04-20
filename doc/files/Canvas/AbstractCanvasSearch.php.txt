@@ -2,6 +2,7 @@
 
 namespace smtech\StMarksSearch\Canvas;
 
+use Exception;
 use smtech\CanvasPest\CanvasPest;
 use smtech\StMarksSearch\SearchEngine;
 
@@ -12,22 +13,25 @@ use smtech\StMarksSearch\SearchEngine;
  */
 abstract class AbstractCanvasSearch extends SearchEngine
 {
+    use RequireCanvasPestParameter;
+
     /**
      * Construct a Canvas search engine
      *
      * @inheritdoc
      *
-     * @param CanvasPest $api
-     * @param mixed[] $params
+     * @param mixed[string] $params
      */
-    public function __construct(CanvasPest $api, $params)
+    public function __construct($params)
     {
+        $this->requireCanvasPestParameter($params);
+
         if (!isset($params['icon'])) {
             $params['icon'] = 'https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico';
         }
 
         if (empty($params['url'])) {
-            $params['url'] = preg_replace('%^(.*)/api/v\d+$%', '$1', $api->base_url);
+            $params['url'] = preg_replace('%^(.*)/api/v\d+$%', '$1', $params['api']->base_url);
         }
 
         parent::__construct($params);

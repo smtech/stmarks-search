@@ -13,6 +13,8 @@ use Exception;
  */
 abstract class AbstractSearchDomain
 {
+    use RequireParameter;
+
     /**
      * Human-readable name of the search domain
      *
@@ -61,10 +63,10 @@ abstract class AbstractSearchDomain
      */
     public function __construct($params)
     {
-        assert(isset($params['url']), new Exception('`url` parameter required'));
+        $this->requireParameter($params, 'url');
         $this->setUrl($params['url']);
 
-        assert(isset($params['name']), new Exception('`name` parameter required'));
+        $this->requireParameter($params, 'name');
         $this->setName($params['name']);
 
         if (isset($params['icon'])) {
@@ -175,20 +177,6 @@ abstract class AbstractSearchDomain
     public function getIcon()
     {
         return $this->icon;
-    }
-
-    /**
-     * Force a boolean result from a particular parameter key
-     *
-     * @param mixed[string] $params
-     * @param string $key    [description]
-     * @return boolean `TRUE` iff `$params[$key]` exists and has a true value
-     *                        (`1`, `'yes'`, `'true'`, `true`, etc.), `FALSE`
-     *                        otherwise.
-     */
-    protected function forceBoolean($params, $key)
-    {
-        return isset($params[$key]) && filter_var($params[$key], FILTER_VALIDATE_BOOLEAN);
     }
 }
 

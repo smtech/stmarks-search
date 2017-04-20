@@ -22,7 +22,8 @@ if ($canvases = $config->toArray('/config/canvas')) {
         $api = new CanvasPest($canvas['api']['url'], $canvas['api']['token']);
         if (count($canvas['course']) > 1) {
             foreach ($canvas['course'] as $course) {
-                $search->addDomain(new CourseSearch($api, $course['@attributes']));
+                $course['@attributes']['api'] = $api;
+                $search->addDomain(new CourseSearch($course['@attributes']));
             }
         } else {
             $search->addDomain(new CourseSearch($api, $canvas['course']['@attributes']));

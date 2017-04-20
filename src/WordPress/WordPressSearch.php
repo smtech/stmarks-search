@@ -2,6 +2,7 @@
 
 namespace smtech\StMarksSearch\WordPress;
 
+use smtech\StMarksSearch\RequireParameter;
 use smtech\StMarksSearch\SearchEngine;
 use smtech\StMarksSearch\WordPress\Pages\PagesSearch;
 use smtech\StMarksSearch\WordPress\Posts\PostsSearch;
@@ -13,6 +14,8 @@ use smtech\StMarksSearch\WordPress\Posts\PostsSearch;
  */
 class WordPressSearch extends SearchEngine
 {
+    use RequireParameter;
+
     /**
      * Construct a WordPressSearch
      *
@@ -23,9 +26,6 @@ class WordPressSearch extends SearchEngine
      */
     public function __construct($params)
     {
-        $params['posts'] = !empty($params['posts']) && filter_var($params['posts'], FILTER_VALIDATE_BOOLEAN);
-        $params['pages'] = !empty($params['pages']) && filter_var($params['pages'], FILTER_VALIDATE_BOOLEAN);
-
         /*
          * FIXME this is really meant to be "if they didn't specify something,
          *       assume they meant posts" -- not sure that this the best way of
@@ -34,6 +34,9 @@ class WordPressSearch extends SearchEngine
         if (!isset($params['posts']) && !isset($params['pages'])) {
             $params['posts'] = true;
         }
+
+        $params['posts'] = $this->forceBooleanParameter($params, 'posts');
+        $params['pages'] = $this->forceBooleanParameter($params, 'pages');
 
         if (!isset($params['icon'])) {
             $params['icon'] = 'https://s.w.org/favicon.ico?2';

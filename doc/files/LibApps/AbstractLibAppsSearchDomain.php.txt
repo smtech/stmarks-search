@@ -3,6 +3,7 @@
 namespace smtech\StMarksSearch\LibApps;
 
 use Exception;
+use smtech\StMarksSearch\RequireParameter;
 use smtech\StMarksSearch\AbstractSearchDomain;
 
 /**
@@ -12,6 +13,8 @@ use smtech\StMarksSearch\AbstractSearchDomain;
  */
 abstract class AbstractLibAppsSearchDomain extends AbstractSearchDomain
 {
+    use RequireParameter;
+
     /**
      * API access object
      * @var LibAppsPest
@@ -28,20 +31,19 @@ abstract class AbstractLibAppsSearchDomain extends AbstractSearchDomain
      */
     public function __construct($params)
     {
+        $this->requireParameter($params, 'site_id');
+        $this->requireParameter($params, 'key');
+
+        assert(
+            is_numeric($params['site_id']),
+            new Exception('`site_id` parameter must be a valid numeric LibApps ID')
+        );
+
         if (!isset($params['icon'])) {
             $params['icon'] = 'https://stmarksschool-ma.libapps.com/favicon.ico';
         }
 
         parent::__construct($params);
-
-        assert(
-            !empty($params['site_id']) && is_numeric($params['site_id']),
-            new Exception('`site_id` parameter must be a valid numeric LibApps ID')
-        );
-        assert(
-            !empty($params['key']),
-            new Exception('`key` parameter must not be empty')
-        );
 
         $this->setApi($params['site_id'], $params['key']);
     }
