@@ -26,7 +26,8 @@ if ($canvases = $config->toArray('/config/canvas')) {
                 $search->addDomain(new CourseSearch($course['@attributes']));
             }
         } else {
-            $search->addDomain(new CourseSearch($api, $canvas['course']['@attributes']));
+            $canvas['course']['@attributes']['api'] = $api;
+            $search->addDomain(new CourseSearch($canvas['course']['@attributes']));
         }
     }
 }
