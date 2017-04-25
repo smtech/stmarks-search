@@ -9,6 +9,8 @@ use smtech\StMarksSearch\AbstractSearchDomain;
  * Parent class of all LibApps search domains
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
+ *
+ * @method LibAppsPest getApi()
  */
 abstract class AbstractLibAppsSearchDomain extends AbstractSearchDomain
 {

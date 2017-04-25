@@ -8,6 +8,12 @@ use JsonSerializable;
  * An object representing a single search result
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
+ *
+ * @method string getUrl()
+ * @method string getTitle()
+ * @method string getDescription()
+ * @method SearchSource getSource()
+ * @method Relevance getRelevance()
  */
 class SearchResult extends ParameterArrayConstructor implements JsonSerializable
 {
@@ -59,7 +65,7 @@ class SearchResult extends ParameterArrayConstructor implements JsonSerializable
      * ]
      * ```
      *
-     * @param mixed[string] $params
+     * @param array $params
      */
     public function __construct($params)
     {

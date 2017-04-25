@@ -21,7 +21,7 @@ class WordPressSearchDomainFactory extends AbstractSearchDomainFactory
      * Construct a WordPress search domain: `$params` must contain a `url`
      * field with a valid URL to a WordPress blog
      *
-     * @param mixed[string] $params
+     * @param array $params
      * @return AbstractSearchDomain[]
      */
     public static function constructSearchDomains($params)

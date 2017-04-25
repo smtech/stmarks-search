@@ -20,7 +20,7 @@ class CourseSearchDomainFactory extends AbstractSearchDomainFactory
     /**
      * Construct course-related search domains
      *
-     * @param mixed[string] $params
+     * @param array $params
      * @return AbstractSearchDomain[]
      */
     public static function constructSearchDomains($params)

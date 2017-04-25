@@ -9,6 +9,10 @@ use JsonSerializable;
  * search domain
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
+ *
+ * @method string getName()
+ * @method string getUrl()
+ * @method string getIcon()
  */
 class SearchSource extends ParameterArrayConstructor implements JsonSerializable
 {

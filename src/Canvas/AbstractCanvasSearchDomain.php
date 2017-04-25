@@ -10,6 +10,9 @@ use smtech\StMarksSearch\AbstractSearchDomain;
  * Parent class for all Canvas search domains
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
+ *
+ * @method CanvasPest getApi()
+ * @method string|integer getId()
  */
 abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
 {
@@ -22,13 +25,15 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
      */
     protected $api;
 
+    protected $id;
+
     /**
      * Construct a CanvasSearchDomain from `$params`, requires `id` and `api`
      * params, will extract `url` param from `api`, if necessary.
      *
      * @inheritdoc
      *
-     * @param mixed[string] $params
+     * @param array $params
      */
     public function __construct($params)
     {
@@ -47,8 +52,6 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
         }
 
         parent::__construct($params);
-
-        $this->setId($params[self::ID]);
     }
 
     /**

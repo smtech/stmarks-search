@@ -6,6 +6,9 @@ use smtech\StMarksSearch\AbstractSearchDomain;
 use smtech\StMarksSearch\SearchResult;
 use smtech\StMarksSearch\SearchSource;
 
+/**
+ * @method WordPressPest getApi()
+ */
 abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
 {
     const POSTS = 'posts';
@@ -27,7 +30,7 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
      * Construct a WordPress search domain: `$params` must contain a `url`
      * field with a valid URL to a WordPress blog
      *
-     * @param mixed[string] $params
+     * @param array $params
      */
     public function __construct($params)
     {

@@ -22,7 +22,7 @@ class ParameterArrayConstructor
      * Require that a specific parameter key exists (and optionally has a
      * particular class as one of its parents)
      *
-     * @param mixed[string] $params
+     * @param array $params
      * @param string $key
      * @param string|false $class (Optional, defaults to `FALSE`) name of class
      *                            to require as a parent
@@ -49,7 +49,7 @@ class ParameterArrayConstructor
     /**
      * Set a parameter to a default value if it is not set
      *
-     * @param mixed[string] $params
+     * @param array $params
      * @param string $key
      * @param mixed $value
      * @param string|false $class
@@ -67,7 +67,7 @@ class ParameterArrayConstructor
     /**
      * Force a boolean result from a particular parameter key
      *
-     * @param mixed[string] $params
+     * @param array $params
      * @param string $key    [description]
      * @return boolean `TRUE` iff `$params[$key]` exists and has a true value
      *                        (`1`, `'yes'`, `'true'`, `true`, etc.), `FALSE`

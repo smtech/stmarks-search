@@ -10,6 +10,10 @@ use Exception;
  * Includes a basic constructor and a reusable sorting method.
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
+ *
+ * @method string getName()
+ * @method string getUrl()
+ * @method string getIcon()
  */
 abstract class AbstractSearchDomain extends ParameterArrayConstructor
 {

@@ -7,7 +7,7 @@ abstract class AbstractSearchDomainFactory extends ParameterArrayConstructor
     /**
      * Construct an array of search domains
      *
-     * @param mixed[string] $params
+     * @param array $params
      * @return AbstractSearchDomain[]
      */
     public static function constructSearchDomains($params)
