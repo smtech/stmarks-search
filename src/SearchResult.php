@@ -2,12 +2,14 @@
 
 namespace smtech\StMarksSearch;
 
+use JsonSerializable;
+
 /**
  * An object representing a single search result
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
-class SearchResult extends ParameterArrayConstructor
+class SearchResult extends ParameterArrayConstructor implements JsonSerializable
 {
     /**
      * URL of the search result
@@ -88,5 +90,16 @@ class SearchResult extends ParameterArrayConstructor
                 return 0;
             }
         });
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'url' => $this->getUrl(),
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'source' => $this->getSource()->jsonSerialize(),
+            'relevance' => $this->getRelevance()->jsonSerialize()
+        ];
     }
 }

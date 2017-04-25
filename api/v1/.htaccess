@@ -1,0 +1,17 @@
+# disable automatic filename re-mapping based on languages (breaks RewriteCond)
+Options -MultiViews
+
+# detect our base directory (probably yadda/yadda/api/v1 or something)
+# (Stack Overflow rocks: http://stackoverflow.com/a/21027742)
+RewriteCond %{ENV:URI} ^$
+RewriteRule ^(.*)$ - [ENV=URI:$1]
+
+RewriteCond %{ENV:BASE} ^$
+RewriteCond %{ENV:URI}::%{REQUEST_URI} ^(.*)::(.*?)\1$
+RewriteRule ^ - [ENV=BASE:%2]
+
+# redirect all requests to index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.*)$ %{ENV:BASE}index.php/$1 [QSA,NC,L]

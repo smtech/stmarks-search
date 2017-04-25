@@ -2,12 +2,14 @@
 
 namespace smtech\StMarksSearch;
 
+use JsonSerializable;
+
 /**
  * Description of a search result's relevance, with rationales
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
-class Relevance
+class Relevance implements JsonSerializable
 {
     const EXACT_MATCH = 5;
 
@@ -95,5 +97,13 @@ class Relevance
         } else {
             return self::EXACT_MATCH * strlen($needle) * count($matches) / strlen($haystack);
         }
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'score' => $this->getScore(),
+            'rationale' => $this->getRationale()
+        ];
     }
 }

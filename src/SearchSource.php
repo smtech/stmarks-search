@@ -2,13 +2,15 @@
 
 namespace smtech\StMarksSearch;
 
+use JsonSerializable;
+
 /**
  * An object representing a simplified description of a search result's source
  * search domain
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
-class SearchSource extends ParameterArrayConstructor
+class SearchSource extends ParameterArrayConstructor implements JsonSerializable
 {
     /**
      * Human-readable name
@@ -36,5 +38,14 @@ class SearchSource extends ParameterArrayConstructor
             'url' => $domain->getUrl(),
             'icon' => $domain->getIcon()
         ]);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'name' => $this->getName(),
+            'url' => $this->getUrl(),
+            'icon' => $this->getIcon()
+        ];
     }
 }
