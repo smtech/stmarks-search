@@ -11,9 +11,11 @@ use Exception;
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
-abstract class AbstractSearchDomain
+abstract class AbstractSearchDomain extends ParameterArrayConstructor
 {
-    use RequireParameter;
+    const NAME = 'name';
+    const URL = 'url';
+    const ICON = 'icon';
 
     /**
      * Human-readable name of the search domain
@@ -63,15 +65,10 @@ abstract class AbstractSearchDomain
      */
     public function __construct($params)
     {
-        $this->requireParameter($params, 'url');
-        $this->setUrl($params['url']);
+        $this->requireParameter($params, self::URL);
+        $this->requireParameter($params, self::NAME);
 
-        $this->requireParameter($params, 'name');
-        $this->setName($params['name']);
-
-        if (isset($params['icon'])) {
-            $this->setIcon($params['icon']);
-        }
+        parent::__construct($params);
     }
 
     /**
@@ -128,53 +125,4 @@ abstract class AbstractSearchDomain
      * @return SearchResult[] Ordered by descending relevance
      */
     abstract public function search($query);
-
-    /**
-     * Sort into order of descending relevance
-     *
-     * @param SearchResult[] $results
-     * @return void
-     */
-    protected function sortByRelevance(&$results)
-    {
-        usort($results, function (SearchResult $a, SearchResult $b) {
-            if ($a->getRelevance()->getScore() < $b->getRelevance()->getScore()) {
-                return 1;
-            } elseif ($a->getRelevance()->getScore() > $b->getRelevance()->getScore()) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-    }
-
-    /**
-     * Human-readable name of the search domain
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * URL of the home page of the search domain
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * URL of the icon of this search domain
-     *
-     * @return string
-     */
-    public function getIcon()
-    {
-        return $this->icon;
-    }
 }

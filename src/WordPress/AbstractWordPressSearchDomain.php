@@ -6,13 +6,11 @@ use smtech\StMarksSearch\AbstractSearchDomain;
 use smtech\StMarksSearch\SearchResult;
 use smtech\StMarksSearch\SearchSource;
 
-/**
- * A parent object for WordPress search domains
- *
- * @author Seth Battis <SethBattis@stmarksschool.org>
- */
 abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
 {
+    const POSTS = 'posts';
+    const PAGES = 'pages';
+
     /**
      * API access object
      * @var WordPressPest
@@ -29,10 +27,12 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
      * Construct a WordPress search domain: `$params` must contain a `url`
      * field with a valid URL to a WordPress blog
      *
-     * @param mixed[] $params
+     * @param mixed[string] $params
      */
     public function __construct($params)
     {
+        static::defaultParameter($params, self::ICON, 'https://s.w.org/favicon.ico?2');
+
         parent::__construct($params);
 
         $this->setApi($this->getUrl());
@@ -50,16 +50,6 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
     }
 
     /**
-     * Get the API access object
-     *
-     * @return WordPressPest
-     */
-    public function getApi()
-    {
-        return $this->api;
-    }
-
-    /**
      * Hook to convert individual items returned by the WordPress API into
      * SearchResults
      *
@@ -70,7 +60,10 @@ abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain
      * @param string $query
      * @return SearchResult
      */
-    abstract protected function processItem($item, $query);
+    protected function processItem($item, $query)
+    {
+        return null;
+    }
 
     /**
      * Process the a response from the WordPress API listing objects

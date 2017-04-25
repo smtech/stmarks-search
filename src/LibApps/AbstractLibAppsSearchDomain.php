@@ -3,7 +3,6 @@
 namespace smtech\StMarksSearch\LibApps;
 
 use Exception;
-use smtech\StMarksSearch\RequireParameter;
 use smtech\StMarksSearch\AbstractSearchDomain;
 
 /**
@@ -13,8 +12,6 @@ use smtech\StMarksSearch\AbstractSearchDomain;
  */
 abstract class AbstractLibAppsSearchDomain extends AbstractSearchDomain
 {
-    use RequireParameter;
-
     /**
      * API access object
      * @var LibAppsPest
@@ -55,15 +52,5 @@ abstract class AbstractLibAppsSearchDomain extends AbstractSearchDomain
     protected function setApi($site_id, $key)
     {
         $this->api = new LibAppsPest($site_id, $key);
-    }
-
-    /**
-     * Access the API access object
-     *
-     * @return LibAppsPest
-     */
-    public function getApi()
-    {
-        return $this->api;
     }
 }

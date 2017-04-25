@@ -51,7 +51,7 @@ class PagesSearch extends AbstractCourseSearchDomain
             }
         }
 
-        $this->sortByRelevance($results);
+        SearchResult::sort($results);
         return $results;
     }
 

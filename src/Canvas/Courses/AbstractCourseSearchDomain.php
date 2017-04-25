@@ -2,28 +2,24 @@
 
 namespace smtech\StMarksSearch\Canvas\Courses;
 
-use Exception;
-use smtech\CanvasPest\CanvasPest;
 use smtech\StMarksSearch\Canvas\AbstractCanvasSearchDomain;
 
-/**
- * Parent object for Canvas course searches
- *
- * @author Seth Battis <SethBattis@stmarksschool.org>
- */
 abstract class AbstractCourseSearchDomain extends AbstractCanvasSearchDomain
 {
-    use DeriveCourseUrlFromId;
-
     public function __construct($params)
     {
         parent::__construct($params);
 
-        $this->setUrl(
-            $this->deriveCourseUrl(
-                $this->getUrl(),
-                $this->getApi()
-            )
-        );
+        if (!preg_match('%.*/courses/\d+$%', $this->getUrl())) {
+            $id = $this->getId();
+            if (!is_numeric($id)) {
+                $course = $this->getApi()->get("/courses/$id");
+                if (!isset($course['id'])) {
+                    throw new Exception("Unknown course `id` parameter: '$id'");
+                }
+                $id = $course['id'];
+            }
+            $this->setUrl($this->getUrl() . "/courses/{$id}");
+        }
     }
 }

@@ -7,10 +7,8 @@ namespace smtech\StMarksSearch;
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
-class SearchResult
+class SearchResult extends ParameterArrayConstructor
 {
-    use RequireParameter;
-
     /**
      * URL of the search result
      * @var string
@@ -68,64 +66,31 @@ class SearchResult
         $this->requireParameter($params, 'relevance', Relevance::class);
         $this->requireParameter($params, 'source', SearchSource::class);
 
-        $this->defaultParameter($params, 'description', '∅');
+        $this->defaultParameter($params, 'description', '[no description available]');
 
-        $this->url = $params['url'];
-        $this->title = $params['title'];
-        $this->relevance = $params['relevance'];
-        $this->source = $params['source'];
-        $this->description = $params['description'];
+        $this->setUrl($params['url']);
+        $this->setTitle($params['title']);
+        $this->setRelevance($params['relevance']);
+        $this->setSource($params['source']);
+        $this->setDescription($params['description']);
     }
 
     /**
-     * Summary of relevance information of the result
+     * Sort into order of descending relevance
      *
-     * @return Relevance
+     * @param SearchResult[] $results
+     * @return void
      */
-    public function getRelevance()
+    public static function sort(&$results)
     {
-        return $this->relevance;
-    }
-
-    /**
-     * Title of the search result
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Description of the search result
-     *
-     * Potentially HTML-formatted, ideally 20-100 words.
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * URL of the search result
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Information about the source of the result
-     *
-     * @return SearchSource
-     */
-    public function getSource()
-    {
-        return $this->source;
+        usort($results, function (SearchResult $a, SearchResult $b) {
+            if ($a->getRelevance()->getScore() < $b->getRelevance()->getScore()) {
+                return 1;
+            } elseif ($a->getRelevance()->getScore() > $b->getRelevance()->getScore()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
     }
 }

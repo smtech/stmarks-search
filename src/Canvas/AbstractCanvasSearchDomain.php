@@ -13,7 +13,14 @@ use smtech\StMarksSearch\AbstractSearchDomain;
  */
 abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
 {
-    use RequireCanvasPestParameter;
+    const ID = 'id';
+    const API = 'api';
+
+    /**
+     * API access object
+     * @var CanvasPest
+     */
+    protected $api;
 
     /**
      * Construct a CanvasSearchDomain from `$params`, requires `id` and `api`
@@ -25,15 +32,62 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
      */
     public function __construct($params)
     {
-        $this->requireParameter($params, 'id');
-        $this->requireCanvasPestParameter($params);
+        static::requireParameter($params, self::ID);
+        static::requireParameter($params, self::API, CanvasPest::class);
 
-        if (empty($params['url'])) {
-            $params['url'] = preg_replace('%^(.*)/api/v\d+$%', '$1', $this->getApi()->base_url);
+        static::defaultParameter(
+            $params,
+            'icon',
+            'https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico'
+        );
+
+        $this->setApi($params[self::API]);
+        if (empty($params[self::URL])) {
+            $params[self::URL] = preg_replace('%^(.*)/api/v\d+$%', '$1', $this->getApi()->base_url);
         }
 
         parent::__construct($params);
 
-        $this->setId($params['id']);
+        $this->setId($params[self::ID]);
+    }
+
+    /**
+     * Update the `$api` field
+     *
+     * @param CanvasPest $api
+     * @throws Exception If `$api` is `NULL`
+     */
+    protected function setApi(CanvasPest $api)
+    {
+        if ($api === null) {
+            throw new Exception('Initialized CanvasPest object required');
+        }
+        $this->api = $api;
+    }
+
+    /**
+     * Get the Canvas API field
+     *
+     * @return CanvasPest
+     */
+    protected function getApi()
+    {
+        return $this->api;
+    }
+
+    /**
+     * Update the ID of the Canvas object
+     *
+     * @used-by AbstractCanvasSearchDomain::__construct()
+     * @param string|integer $id Canvas ID or SIS ID formatted as `sis_*_id:*`
+     */
+    protected function setId($id)
+    {
+        if (!is_numeric($id) &&
+            !preg_match('/^sis_[a-z]+_id:\S+$/i', $id)
+        ) {
+            throw new Exception('ID must be a Canvas ID or SIS ID, received:' . PHP_EOL . print_r($id, true));
+        }
+        $this->id = $id;
     }
 }

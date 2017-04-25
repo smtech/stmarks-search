@@ -5,9 +5,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Battis\ConfigXML;
 use smtech\CanvasPest\CanvasPest;
 use smtech\StMarksSearch\SearchEngine;
-use smtech\StMarksSearch\Canvas\Courses\CourseSearch;
-use smtech\StMarksSearch\WordPress\WordPressSearch;
-use smtech\StMarksSearch\LibApps\LibGuides\LibGuidesSearch;
+use smtech\StMarksSearch\Canvas\Courses\CourseSearchDomainFactory;
+use smtech\StMarksSearch\WordPress\WordPressSearchDomainFactory;
+use smtech\StMarksSearch\LibApps\LibGuides\LibGuidesSearchDomainFactory;
 
 if (empty($config)) {
     $config = __DIR__ . '/config.xml';
@@ -15,31 +15,24 @@ if (empty($config)) {
 
 $config = new ConfigXML($config);
 
-$search = new SearchEngine($config->toArray('/config/engine')[0]);
+$search = [];
 
-if ($canvases = $config->toArray('/config/canvas')) {
-    foreach ($canvases as $canvas) {
-        $api = new CanvasPest($canvas['api']['url'], $canvas['api']['token']);
-        if (count($canvas['course']) > 1) {
-            foreach ($canvas['course'] as $course) {
-                $course['@attributes']['api'] = $api;
-                $search->addDomain(new CourseSearch($course['@attributes']));
-            }
-        } else {
-            $canvas['course']['@attributes']['api'] = $api;
-            $search->addDomain(new CourseSearch($canvas['course']['@attributes']));
-        }
+if ($courses = $config->toArray('/config/canvas/course')) {
+    $api = $config->newInstanceOf(CanvasPest::class, '/config/canvas/api');
+    foreach ($courses as $course) {
+        $course['@attributes']['api'] = $api;
+        $search = array_merge($search, CourseSearchDomainFactory::constructSearchDomains($course['@attributes']));
     }
 }
 
 if ($blogs = $config->toArray('/config/wordpress/blog')) {
     foreach ($blogs as $blog) {
-        $search->addDomain(new WordPressSearch($blog['@attributes']));
+        $search = array_merge($search, WordPressSearchDomainFactory::constructSearchDomains($blog['@attributes']));
     }
 }
 
 if ($libguides = $config->toArray('/config/libapps/libguides')) {
     foreach ($libguides as $libguide) {
-        $search->addDomain(new LibGuidesSearch($libguide['@attributes']));
+        $search = array_merge($search, LibGuidesSearchDomainFactory::constructSearchDomains($libguide['@attributes']));
     }
 }

@@ -9,7 +9,6 @@
                 <button class="btn btn-primary" type="submit">Search</button>
             </span>
         </div>
-        <p class="help-block"><small>Searching {$domains}</small></p>
     </div>
 {/block}
 

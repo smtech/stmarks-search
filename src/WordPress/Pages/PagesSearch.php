@@ -30,7 +30,7 @@ class PagesSearch extends AbstractWordPressSearchDomain
             $query
         );
 
-        $this->sortByRelevance($results);
+        SearchResult::sort($results);
         return $results;
     }
 

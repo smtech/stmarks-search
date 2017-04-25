@@ -43,7 +43,7 @@ class LibGuidesSearch extends AbstractLibAppsSearchDomain
             }
         }
 
-        $this->sortByRelevance($results);
+        SearchResult::sort($results);
         return $results;
     }
 

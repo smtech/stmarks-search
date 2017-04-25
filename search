@@ -29,9 +29,16 @@ if (empty($query) || $query == __FILE__ || isset($options['h']) || isset($option
 
 require_once 'common.inc.php';
 
+use smtech\StMarksSearch\SearchResult;
 
-echo PHP_EOL . 'Searching ' . $search->getDomains(false) . " for '$query'" . PHP_EOL . PHP_EOL;
-$results = $search->search($query);
+$results = [];
+if (is_array($search)) {
+    foreach ($search as $domain) {
+        $results = array_merge($results, $domain->search($query));
+    }
+    SearchResult::sort($results);
+}
+
 foreach ($results as $result) {
     echo $result->getTitle() .
         ' [' . $result->getRelevance()->getScore() . ', ' .

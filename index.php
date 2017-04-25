@@ -3,6 +3,7 @@
 require_once 'common.inc.php';
 
 use smtech\StMarksSmarty\StMarksSmarty;
+use smtech\StMarksSearch\SearchResult;
 
 $smarty = new StMarksSmarty(__DIR__ . '/templates');
 $smarty->setFramed(true);
@@ -10,16 +11,22 @@ $smarty->addStylesheet('css/index.css');
 $smarty->addScript('js/index.js');
 
 $smarty->assign([
-    'title' => $search->getName(),
+    'title' => $config->toString('/config/engine/name'),
     'formMethod' => 'GET',
     'search' => $search,
-    'domains' => $search->getDomains()
 ]);
 
 if (!empty($_REQUEST['query'])) {
+    $results = [];
+    if (is_array($search)) {
+        foreach ($search as $domain) {
+            $results = array_merge($results, $domain->search($_REQUEST['query']));
+        }
+        SearchResult::sort($results);
+    }
     $smarty->assign([
         'query' => $_REQUEST['query'],
-        'results' => $search->search($_REQUEST['query'])
+        'results' => $results
     ]);
 }
 
