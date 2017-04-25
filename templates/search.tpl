@@ -9,6 +9,7 @@
                 <button class="btn btn-primary" type="submit">Search</button>
             </span>
         </div>
+        <p class="help-block">Searching across {$searchDomainCount} sources</p>
     </div>
 {/block}
 

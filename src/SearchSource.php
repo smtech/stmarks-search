@@ -8,7 +8,7 @@ namespace smtech\StMarksSearch;
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
-class SearchSource
+class SearchSource extends ParameterArrayConstructor
 {
     /**
      * Human-readable name
@@ -22,6 +22,8 @@ class SearchSource
      */
     private $url;
 
+    private $icon;
+
     /**
      * Construct a SearchSource from a search domain
      *
@@ -31,6 +33,7 @@ class SearchSource
     {
         $this->name = $domain->getName();
         $this->url = $domain->getUrl();
+        $this->icon = $domain->getIcon();
     }
 
     /**
@@ -51,5 +54,10 @@ class SearchSource
     public function getUrl()
     {
         return $this->url;
+    }
+
+    public function getIcon()
+    {
+        return $this->icon;
     }
 }

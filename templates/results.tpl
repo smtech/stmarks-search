@@ -9,7 +9,7 @@
                     {$result->getRelevance()->getScore()|string_format:"%.2f"}
                 </span>
                 <span class="pull-right">
-                    <small>from <a href="{$result->getSource()->getUrl()}">{$result->getSource()->getName()}</a></small>
+                    <small>from <a href="{$result->getSource()->getUrl()}"><img src="{$result->getSource()->getIcon()}" class="domain-icon">{$result->getSource()->getName()}</a></small>
                 </span>
             </p>
             <p>{$result->getDescription()}</p>

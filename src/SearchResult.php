@@ -68,11 +68,7 @@ class SearchResult extends ParameterArrayConstructor
 
         $this->defaultParameter($params, 'description', '[no description available]');
 
-        $this->setUrl($params['url']);
-        $this->setTitle($params['title']);
-        $this->setRelevance($params['relevance']);
-        $this->setSource($params['source']);
-        $this->setDescription($params['description']);
+        parent::__construct($params);
     }
 
     /**

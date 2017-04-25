@@ -13,7 +13,7 @@ $smarty->addScript('js/index.js');
 $smarty->assign([
     'title' => $config->toString('/config/engine/name'),
     'formMethod' => 'GET',
-    'search' => $search,
+    'searchDomainCount' => count($search),
 ]);
 
 if (!empty($_REQUEST['query'])) {
