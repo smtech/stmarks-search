@@ -4,7 +4,7 @@ import SearchResults from './SearchResults';
 
 export default class App extends Component {
 
-    api = '../../api/v1/';
+    api = 'api/v1/';
 
     state = {
         query: '',
