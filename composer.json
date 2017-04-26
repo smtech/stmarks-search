@@ -10,8 +10,7 @@
     ],
     "require": {
         "battis/configxml": "^1.0",
-        "smtech/canvaspest": "^1.0",
-        "smtech/stmarkssmarty": "^1.0"
+        "smtech/canvaspest": "^1.0"
     },
     "autoload": {
         "psr-4": {

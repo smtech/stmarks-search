@@ -1,0 +1,13 @@
+.tooltip-inner {
+    white-space: pre-wrap;
+}
+
+.domain-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: baseline;
+}
+
+.readable-width {
+    max-width: 680px;
+}
