@@ -1,4 +1,5 @@
 <?php
+/** PagesSearch class */
 
 namespace smtech\StMarksSearch\WordPress\Pages;
 

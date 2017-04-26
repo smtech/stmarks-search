@@ -1,31 +1,30 @@
 <?php
+/** AbstractCourseSearchDomain class */
 
 namespace smtech\StMarksSearch\Canvas\Courses;
 
-use Exception;
-use smtech\CanvasPest\CanvasPest;
 use smtech\StMarksSearch\Canvas\AbstractCanvasSearchDomain;
 
 /**
- * Parent object for Canvas course searches
+ * Parent class for all Canvas course search domains
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
 abstract class AbstractCourseSearchDomain extends AbstractCanvasSearchDomain
 {
     /**
-     * Localize the general Canvas URL to a particular course (if necessary)
+     * Construct an course search domains
      *
-     * Will "localize" the `url` parameter after initialization -- i.e. if the
-     * URL of the search domain is `https://canvas.instructure.com` and the ID
-     * is 43, the URL will be localized to
-     * `https://canvas.instructure.com/courses/43`
+     * Automagically "localizes" a Canvas instance URL to be the course's
+     * unique URL (potentially using the Canvas API to resolve course ID's of
+     * the format `sis_course_id:foo-bar`)
      *
-     * @return void
-     * @throws Exception if `id` param does not result in valid Canvas course
+     * @param array $params
      */
-    protected function localizeUrl()
+    public function __construct($params)
     {
+        parent::__construct($params);
+
         if (!preg_match('%.*/courses/\d+$%', $this->getUrl())) {
             $id = $this->getId();
             if (!is_numeric($id)) {

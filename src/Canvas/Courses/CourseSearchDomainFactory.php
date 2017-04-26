@@ -1,14 +1,16 @@
 <?php
+/** CourseSearchDomainFactory class */
 
 namespace smtech\StMarksSearch\Canvas\Courses;
 
 use smtech\StMarksSearch\AbstractSearchDomain;
 use smtech\StMarksSearch\AbstractSearchDomainFactory;
+use smtech\StMarksSearch\Canvas\Courses\AbstractCanvasSearchDomain;
 use smtech\StMarksSearch\Canvas\Courses\Announcements\AnnouncementsSearch;
 use smtech\StMarksSearch\Canvas\Courses\Pages\PagesSearch;
 
 /**
- * Search a Canvas course
+ * Factory to generate search domains relevant to a particular Canvas Course
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
@@ -21,7 +23,7 @@ class CourseSearchDomainFactory extends AbstractSearchDomainFactory
      * Construct course-related search domains
      *
      * @param array $params
-     * @return AbstractSearchDomain[]
+     * @return AbstractCourseSearchDomain[]
      */
     public static function constructSearchDomains($params)
     {

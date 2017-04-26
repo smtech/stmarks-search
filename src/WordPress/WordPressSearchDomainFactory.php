@@ -1,14 +1,17 @@
 <?php
+/** WordPressSearchDomainFactory class */
 
 namespace smtech\StMarksSearch\WordPress;
 
 use smtech\StMarksSearch\AbstractSearchDomain;
 use smtech\StMarksSearch\AbstractSearchDomainFactory;
+use smtech\StMarksSearch\WordPress\AbstractWordPressSearchDomain;
 use smtech\StMarksSearch\WordPress\Pages\PagesSearch;
 use smtech\StMarksSearch\WordPress\Posts\PostsSearch;
 
 /**
- * A parent object for WordPress search domains
+ * A factory to generate an array of all search domains relevant to a
+ * particular blog entry
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
@@ -18,11 +21,10 @@ class WordPressSearchDomainFactory extends AbstractSearchDomainFactory
     const PAGES = 'pages';
 
     /**
-     * Construct a WordPress search domain: `$params` must contain a `url`
-     * field with a valid URL to a WordPress blog
+     * Construct an array of search domains relevant to a blog entry
      *
      * @param array $params
-     * @return AbstractSearchDomain[]
+     * @return AbstractWordPressSearchDomain[]
      */
     public static function constructSearchDomains($params)
     {

@@ -1,4 +1,5 @@
 <?php
+/** AbstractWordPressSearchDomain class */
 
 namespace smtech\StMarksSearch\WordPress;
 
@@ -7,6 +8,10 @@ use smtech\StMarksSearch\SearchResult;
 use smtech\StMarksSearch\SearchSource;
 
 /**
+ * Parent class for all WordPress search domains
+ *
+ * @author Seth Battis <SethBattis@stmarksschool.org>
+ *
  * @method WordPressPest getApi()
  */
 abstract class AbstractWordPressSearchDomain extends AbstractSearchDomain

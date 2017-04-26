@@ -1,26 +1,42 @@
 <?php
+/** SearchSource class */
 
 namespace smtech\StMarksSearch;
+
+use JsonSerializable;
 
 /**
  * An object representing a simplified description of a search result's source
  * search domain
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
+ *
+ * @method setName(string $name)
+ * @method string getName()
+ * @method setUrl(string $url)
+ * @method string getUrl()
+ * @method setIcon(string $iconUrl)
+ * @method string getIcon()
  */
-class SearchSource
+class SearchSource extends ParameterArrayConstructor implements JsonSerializable
 {
     /**
      * Human-readable name
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * URL to source home page
      * @var string
      */
-    private $url;
+    protected $url;
+
+    /**
+     * URL to source icon image
+     * @var string
+     */
+    protected $icon;
 
     /**
      * Construct a SearchSource from a search domain
@@ -29,28 +45,27 @@ class SearchSource
      */
     public function __construct(AbstractSearchDomain $domain)
     {
-        $this->name = $domain->getName();
-        $this->url = $domain->getUrl();
+        parent::__construct([
+            'name' => $domain->getName(),
+            'url' => $domain->getUrl(),
+            'icon' => $domain->getIcon()
+        ]);
     }
 
     /**
-     * Human-readable name of the source search domain
+     * Return an array ready for JSON serialization
      *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * URL of the source search domain's home page
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php JsonSerializable::jsonSerialize()
      *
-     * @return string
+     * @return array
      */
-    public function getUrl()
+    public function jsonSerialize()
     {
-        return $this->url;
+        return [
+            'name' => $this->getName(),
+            'url' => $this->getUrl(),
+            'icon' => $this->getIcon()
+        ];
     }
 }
 

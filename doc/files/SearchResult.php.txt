@@ -1,16 +1,28 @@
 <?php
+/** SearchResult class */
 
 namespace smtech\StMarksSearch;
+
+use JsonSerializable;
 
 /**
  * An object representing a single search result
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
+ *
+ * @method string getUrl()
+ * @method setUrl(string $url)
+ * @method string getTitle()
+ * @method setTitle(string $title)
+ * @method string getDescription()
+ * @method setDescription(string $description)
+ * @method SearchSource getSource()
+ * @method setSearchSource(SearchSource $source)
+ * @method Relevance getRelevance()
+ * @method setRelevance(Relevance $relevance)
  */
-class SearchResult
+class SearchResult extends ParameterArrayConstructor implements JsonSerializable
 {
-    use RequireParameter;
-
     /**
      * URL of the search result
      * @var string
@@ -59,7 +71,7 @@ class SearchResult
      * ]
      * ```
      *
-     * @param mixed[string] $params
+     * @param array $params
      */
     public function __construct($params)
     {
@@ -68,65 +80,60 @@ class SearchResult
         $this->requireParameter($params, 'relevance', Relevance::class);
         $this->requireParameter($params, 'source', SearchSource::class);
 
-        $this->defaultParameter($params, 'description', '∅');
+        $this->defaultParameter($params, 'description', '[no description available]');
 
-        $this->url = $params['url'];
-        $this->title = $params['title'];
-        $this->relevance = $params['relevance'];
-        $this->source = $params['source'];
-        $this->description = $params['description'];
+        parent::__construct($params);
     }
 
     /**
-     * Summary of relevance information of the result
+     * Sort into order of descending relevance
      *
-     * @return Relevance
+     * @param SearchResult[] $results
+     * @return void
      */
-    public function getRelevance()
+    public static function sort(&$results)
     {
-        return $this->relevance;
+        usort($results, function (SearchResult $a, SearchResult $b) {
+            if ($a->getRelevance()->getScore() < $b->getRelevance()->getScore()) {
+                return 1;
+            } elseif ($a->getRelevance()->getScore() > $b->getRelevance()->getScore()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
     }
 
     /**
-     * Title of the search result
+     * Generate a hash to uniquely identify this search result
+     *
+     * Uniqueness is determined as a combination of the URL and its relevance
+     * score (to this search)
      *
      * @return string
      */
-    public function getTitle()
+    public function getHash()
     {
-        return $this->title;
+        return hash('crc32', $this->getUrl() . $this->getRelevance()->getScore());
     }
 
     /**
-     * Description of the search result
+     * Return an array ready for JSON serialization
      *
-     * Potentially HTML-formatted, ideally 20-100 words.
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php JsonSerializable::jsonSerialize()
      *
-     * @return string
+     * @return array
      */
-    public function getDescription()
+    public function jsonSerialize()
     {
-        return $this->description;
-    }
-
-    /**
-     * URL of the search result
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Information about the source of the result
-     *
-     * @return SearchSource
-     */
-    public function getSource()
-    {
-        return $this->source;
+        return [
+            'url' => $this->getUrl(),
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'source' => $this->getSource()->jsonSerialize(),
+            'relevance' => $this->getRelevance()->jsonSerialize(),
+            'hash' => $this->getHash()
+        ];
     }
 }
 

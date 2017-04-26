@@ -1,4 +1,5 @@
 <?php
+/** Relevance class */
 
 namespace smtech\StMarksSearch;
 
@@ -99,6 +100,13 @@ class Relevance implements JsonSerializable
         }
     }
 
+    /**
+     * Return an array ready for JSON serialization
+     *
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php JsonSerializable::jsonSerialize()
+     *
+     * @return array
+     */
     public function jsonSerialize()
     {
         return [

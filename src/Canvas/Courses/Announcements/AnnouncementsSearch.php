@@ -1,4 +1,5 @@
 <?php
+/** AnnouncementsSearch class */
 
 namespace smtech\StMarksSearch\Canvas\Courses\Announcements;
 

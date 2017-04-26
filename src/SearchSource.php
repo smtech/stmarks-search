@@ -1,4 +1,5 @@
 <?php
+/** SearchSource class */
 
 namespace smtech\StMarksSearch;
 
@@ -10,8 +11,11 @@ use JsonSerializable;
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  *
+ * @method setName(string $name)
  * @method string getName()
+ * @method setUrl(string $url)
  * @method string getUrl()
+ * @method setIcon(string $iconUrl)
  * @method string getIcon()
  */
 class SearchSource extends ParameterArrayConstructor implements JsonSerializable
@@ -28,6 +32,10 @@ class SearchSource extends ParameterArrayConstructor implements JsonSerializable
      */
     protected $url;
 
+    /**
+     * URL to source icon image
+     * @var string
+     */
     protected $icon;
 
     /**
@@ -44,6 +52,13 @@ class SearchSource extends ParameterArrayConstructor implements JsonSerializable
         ]);
     }
 
+    /**
+     * Return an array ready for JSON serialization
+     *
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php JsonSerializable::jsonSerialize()
+     *
+     * @return array
+     */
     public function jsonSerialize()
     {
         return [

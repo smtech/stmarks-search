@@ -1,11 +1,26 @@
 <?php
+/** ParameterArrayConstructor class */
 
 namespace smtech\StMarksSearch;
 
 use Exception;
 
+/**
+ * A parent class that supports construction via a parameter array (and
+ * provides automagically generated setter and getter methods via `__call`), as
+ * well as some other handy parameter-management methods.
+ *
+ * @author Seth Battis <SethBattis@stmarksschool.org>
+ */
 class ParameterArrayConstructor
 {
+    /**
+     * Construct an object
+     *
+     * Stores all members of the `$params` array to the object's properties
+     *
+     * @param array $params Associative array of parameters
+     */
     public function __construct($params)
     {
         foreach ($params as $field => $value) {
@@ -78,11 +93,47 @@ class ParameterArrayConstructor
         return isset($params[$key]) && filter_var($params[$key], FILTER_VALIDATE_BOOLEAN);
     }
 
+    /**
+     * Consume parameters out of a parameter array
+     *
+     * For example, if `$params` was:
+     *
+     * ```
+     * [
+     *   'foo' => 'A',
+     *   'bar' => 'B',
+     *   'baz' => 'C'
+     * ]
+     * ```
+     *
+     * then the call `static::ConsumeParameters($params, ['bar'])` would return:
+     *
+     * ```
+     * [
+     *   'foo' => 'A',
+     *   'baz' => 'C'
+     * ]
+     * ```
+     *
+     * @param array $params
+     * @param string[] $consumedParams
+     * @return array
+     */
     protected static function consumeParameters($params, $consumedParams)
     {
         return array_diff_key($params, array_flip($consumedParams));
     }
 
+    /**
+     * Generate setter and getter methods
+     *
+     * Methods are named such that for a property `$camelCase`, the methods
+     * would be `getCamelCase()` and `setCamelCase($value)`
+     *
+     * @param string $method
+     * @param array $arguments
+     * @return void
+     */
     public function __call($method, $arguments)
     {
         if (method_exists($this, $method)) {

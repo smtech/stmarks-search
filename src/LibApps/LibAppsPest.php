@@ -1,4 +1,5 @@
 <?php
+/** LibApps class */
 
 namespace smtech\StMarksSearch\LibApps;
 

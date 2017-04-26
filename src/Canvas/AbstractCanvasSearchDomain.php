@@ -1,4 +1,5 @@
 <?php
+/** AbstractCanvasSearchDomain class */
 
 namespace smtech\StMarksSearch\Canvas;
 
@@ -11,7 +12,6 @@ use smtech\StMarksSearch\AbstractSearchDomain;
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  *
- * @method CanvasPest getApi()
  * @method string|integer getId()
  */
 abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
@@ -25,6 +25,10 @@ abstract class AbstractCanvasSearchDomain extends AbstractSearchDomain
      */
     protected $api;
 
+    /**
+     * Canvas ID of object
+     * @var string|integer
+     */
     protected $id;
 
     /**

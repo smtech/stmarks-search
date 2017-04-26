@@ -1,4 +1,5 @@
 <?php
+/** AbstractSearchDomain class */
 
 namespace smtech\StMarksSearch;
 
@@ -12,8 +13,11 @@ use Exception;
  * @author Seth Battis <SethBattis@stmarksschool.org>
  *
  * @method string getName()
+ * @method setName(string $name)
  * @method string getUrl()
+ * @method seturl(string $url)
  * @method string getIcon()
+ * @method setIcon(string $iconUrl)
  */
 abstract class AbstractSearchDomain extends ParameterArrayConstructor
 {

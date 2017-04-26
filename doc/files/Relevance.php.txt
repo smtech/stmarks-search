@@ -1,13 +1,16 @@
 <?php
+/** Relevance class */
 
 namespace smtech\StMarksSearch;
+
+use JsonSerializable;
 
 /**
  * Description of a search result's relevance, with rationales
  *
  * @author Seth Battis <SethBattis@stmarksschool.org>
  */
-class Relevance
+class Relevance implements JsonSerializable
 {
     const EXACT_MATCH = 5;
 
@@ -95,6 +98,21 @@ class Relevance
         } else {
             return self::EXACT_MATCH * strlen($needle) * count($matches) / strlen($haystack);
         }
+    }
+
+    /**
+     * Return an array ready for JSON serialization
+     *
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php JsonSerializable::jsonSerialize()
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'score' => $this->getScore(),
+            'rationale' => $this->getRationale()
+        ];
     }
 }
 

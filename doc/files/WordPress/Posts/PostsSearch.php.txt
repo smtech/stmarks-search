@@ -1,4 +1,5 @@
 <?php
+/** PostsSearch class */
 
 namespace smtech\StMarksSearch\WordPress\Posts;
 
@@ -30,7 +31,7 @@ class PostsSearch extends AbstractWordPressSearchDomain
             $query
         );
 
-        $this->sortByRelevance($results);
+        SearchResult::sort($results);
         return $results;
     }
 

@@ -1,4 +1,5 @@
 <?php
+/** AbstractLibAppsSearchDomain class */
 
 namespace smtech\StMarksSearch\LibApps;
 

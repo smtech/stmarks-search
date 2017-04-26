@@ -1,4 +1,5 @@
 <?php
+/** SearchResult class */
 
 namespace smtech\StMarksSearch;
 
@@ -10,10 +11,15 @@ use JsonSerializable;
  * @author Seth Battis <SethBattis@stmarksschool.org>
  *
  * @method string getUrl()
+ * @method setUrl(string $url)
  * @method string getTitle()
+ * @method setTitle(string $title)
  * @method string getDescription()
+ * @method setDescription(string $description)
  * @method SearchSource getSource()
+ * @method setSearchSource(SearchSource $source)
  * @method Relevance getRelevance()
+ * @method setRelevance(Relevance $relevance)
  */
 class SearchResult extends ParameterArrayConstructor implements JsonSerializable
 {
@@ -98,11 +104,26 @@ class SearchResult extends ParameterArrayConstructor implements JsonSerializable
         });
     }
 
+    /**
+     * Generate a hash to uniquely identify this search result
+     *
+     * Uniqueness is determined as a combination of the URL and its relevance
+     * score (to this search)
+     *
+     * @return string
+     */
     public function getHash()
     {
         return hash('crc32', $this->getUrl() . $this->getRelevance()->getScore());
     }
 
+    /**
+     * Return an array ready for JSON serialization
+     *
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php JsonSerializable::jsonSerialize()
+     *
+     * @return array
+     */
     public function jsonSerialize()
     {
         return [

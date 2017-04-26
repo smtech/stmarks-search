@@ -1,4 +1,5 @@
 <?php
+/** WordPressPest class */
 
 namespace smtech\StMarksSearch\WordPress;
 

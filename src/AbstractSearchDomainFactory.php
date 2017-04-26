@@ -1,7 +1,13 @@
 <?php
+/** AbstractSearchDomainFactory class */
 
 namespace smtech\StMarksSearch;
 
+/**
+ * A parent factory class to generate an array of search domains
+ *
+ * @author Seth Battis <SethBattis@stmarksschool.org>
+ */
 abstract class AbstractSearchDomainFactory extends ParameterArrayConstructor
 {
     /**
