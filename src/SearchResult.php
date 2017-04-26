@@ -98,6 +98,11 @@ class SearchResult extends ParameterArrayConstructor implements JsonSerializable
         });
     }
 
+    public function getHash()
+    {
+        return hash('crc32', $this->getUrl() . $this->getRelevance()->getScore());
+    }
+
     public function jsonSerialize()
     {
         return [
@@ -105,7 +110,8 @@ class SearchResult extends ParameterArrayConstructor implements JsonSerializable
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
             'source' => $this->getSource()->jsonSerialize(),
-            'relevance' => $this->getRelevance()->jsonSerialize()
+            'relevance' => $this->getRelevance()->jsonSerialize(),
+            'hash' => $this->getHash()
         ];
     }
 }
