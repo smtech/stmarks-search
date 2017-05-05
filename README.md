@@ -13,26 +13,26 @@ Why two parts? Well… I wanted to protect my various API and server credentials
 
 ### Install
 
-  1. Clone the repository to your web-server document directory (clearly, I am assuming that you use Apache -- you will need to adapt my `.htaccess` files for IIS or Nginx or Node as needed).
-    ```bash
-    git clone https://github.com/smtech/stmarks-search.git path/to/dir/stmarks-search
-    ```
+  1. Clone the repository to your web-server document directory (clearly, I am assuming that you use Apache -- you will need to adapt my `.htaccess` files for IIS or Nginx or Node as needed).  
+```bash
+git clone https://github.com/smtech/stmarks-search.git path/to/dir/stmarks-search
+```  
   2. Install the PHP dependencies using [Composer](http://getcomposer.org).
-    ```bash
-    cd path/to/stmarks-search
-    composer install -o --prefer-dist
-    ```
+```bash
+cd path/to/stmarks-search
+composer install -o --prefer-dist
+```
   3. Install the Node dependencies using [NPM](https://www.npmjs.com) and build the client app.
-    ```bash
-    cd path/to/stmarks-search/client
-    npm install
-    npm run build
-    ```
-  4. Configure the search domains.
-    ```bash
-    cd path/to/stmarks-search
-    cp config-example.xml config.xml
-    ```
-    Edit `config.xml` to reflect your particular search domains.
+```bash
+cd path/to/stmarks-search/client
+npm install
+npm run build
+```
+  4. Make your own `config.xml` configuration file describing your search domains and credentials.0
+```bash
+cd path/to/stmarks-search
+cp config-example.xml config.xml
+nano config.xml
+```
 
 Et voilà! Point your web browser at the root of the stmark-search -- http://yourserver.com/path/to/stmarks-search and let 'er rip!
