@@ -42,6 +42,7 @@ Et voilà! Point your web browser at the root of the stmark-search -- http://you
 At the moment, this project is stalled out because of configuration issues around the [Google API Manager](https://console.developers.google.com/apis/dashboard). I can't create a new project and I get the following error:
 
 > Create Project: stmarks-search
+>
 > APPHOSTING_ADMIN Cloud Service disabled by admin. Please contact admin to restore service. com.google.apps.framework.request.StatusException: <eye3 title='FAILED_PRECONDITION'/> generic::FAILED_PRECONDITION: APPHOSTING_ADMIN Cloud Service disabled by admin. Please contact admin to restore service.
 
 Sounds like a permissions error.
