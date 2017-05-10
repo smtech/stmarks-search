@@ -36,3 +36,40 @@ nano config.xml
 ```
 
 Et voilà! Point your web browser at the root of the stmark-search -- http://yourserver.com/path/to/stmarks-search and let 'er rip!
+
+### Next Steps
+
+At the moment, this project is stalled out because of configuration issues around the [Google API Manager](https://console.developers.google.com/apis/dashboard). I can't create a new project and I get the following error:
+
+> Create Project: stmarks-search
+> APPHOSTING_ADMIN Cloud Service disabled by admin. Please contact admin to restore service. com.google.apps.framework.request.StatusException: <eye3 title='FAILED_PRECONDITION'/> generic::FAILED_PRECONDITION: APPHOSTING_ADMIN Cloud Service disabled by admin. Please contact admin to restore service.
+
+Sounds like a permissions error.
+
+Here's what the path forward would be:
+
+  - Issue an OAuth ID and key for the Google Drive API in the API Manager
+  - Set up a backing database for this project to cache API access tokens for users
+  - Add a a Google API client to the Composer dependencies for this project. (I believe Google has a quickstart for doing this [in their documentation](https://developers.google.com/drive/v3/web/quickstart/php).)
+  - Work out a scheme for including Google Drive folders in the `config.xml` file. I've been thinking it would be something like:
+```xml
+<google>
+  <drive>
+    <api>
+      <id>OAuth ID here</id>
+      <secret>OAuth secret here</secret>
+    </api>
+    <folder name="Faculty Resources" id="0Bx1atGpuKjk9YkNyb2Q1RUNoOWM" />
+    <folder name="Student Resources" id="0Bx1atGpuKjk9anlxT2FPWjIwNDQ" />
+  </drive>
+  <calendars>
+    <calendar name="Calendars would be neat too" />
+  </calendars>
+</google>
+```
+  - This would then give us the information we need to extend an create a `GooglePest` and a `GoogleDriveSearchDomain`, we hope.
+  - `GoogleDriveSearchDomain` would make requests to the [Google Drive](https://github.com/smtech/stmarks-search/issues/3) RESTful API like (I mean, y'know, hypothetically) this one. This would, be informed by [this documentation](https://developers.google.com/drive/v3/reference/files/list) and [this documentation](https://developers.google.com/drive/v3/web/search-parameters). Just sayin'.
+```rest
+GET https://www.googleapis.com/drive/v3/files?q=%220Bx1atGpuKjk9YkNyb2Q1RUNoOWM%22+in+parents+and+%28name+contains+%22query%22+or+fullText+contains+%22query%22%29
+```
+  - I imagine that similar requests could be made around [Google Groups](https://github.com/smtech/stmarks-search/issues/6), Gmail, or [Google Calendar](https://github.com/smtech/stmarks-search/issues/13)  that would also be useful.
